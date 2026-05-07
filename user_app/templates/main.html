@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>World IT</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
     <style>
         * {
             margin: 0;
@@ -14,116 +16,87 @@
         body {
             min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             font-family: 'Inter', sans-serif;
             background: #FFFFFF;
         }
 
-        .frame {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 32px;
+        /* Головний контейнер */
+        .page {
             width: 500px;
             max-width: 90%;
-            padding: 20px 0;
-        }
-
-        .logo-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
+            gap: 32px;
         }
 
-        .logo-image {
+        /* Логотип */
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo img {
             width: 212px;
             height: auto;
             display: block;
         }
 
-        .logo-text {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .logo span {
+            font-size: 12px;
             font-weight: 600;
-            font-size: 14px;
             letter-spacing: 0.1em;
             color: #070A1C;
         }
 
-        .title-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-        }
-
+        /* Заголовок */
         .title {
-            display: flex;
-            font-weight: 600;
             font-size: 24px;
+            font-weight: 600;
             line-height: 32px;
             letter-spacing: -0.025em;
             color: #070A1C;
             text-align: center;
         }
 
+        /* Контент */
         .content {
+            width: 100%;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
             gap: 24px;
-            width: 100%;
+            align-items: center;
         }
 
         .subtitle {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: 400;
             font-size: 14px;
             line-height: 20px;
             color: #71717A;
             text-align: center;
-            width: 100%;
         }
 
+        /* Форма */
         .form {
-            display: flex;
-            flex-direction: column;
             width: 100%;
-        }
-
-        .form-group {
             display: flex;
             flex-direction: column;
             gap: 16px;
-            width: 100%;
-        }
-
-        .input-wrapper {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
         }
 
         .input {
-            display: flex;
             width: 100%;
-            padding: 8px 12px;
-            background: #FFFFFF;
-            border: 1px solid #E2E1EC;
-            box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+            height: 36px;
+            padding: 4px 12px;
             border-radius: 6px;
+            border: 1px solid #E2E1EC;
+            background: #FFFFFF;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
             font-family: 'Inter', sans-serif;
-            font-weight: 400;
             font-size: 14px;
-            line-height: 20px;
             color: #070A1C;
         }
 
@@ -136,23 +109,20 @@
             border-color: #070A1C;
         }
 
+        /* Кнопка */
         .button {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 8px 16px;
-            gap: 8px;
-            width: 100%;
-            background: #070A1C;
-            box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.05);
+            height: 36px;
             border-radius: 6px;
+            border: none;
+            background: #070A1C;
             color: #FAF8FF;
             font-family: 'Inter', sans-serif;
-            font-weight: 500;
             font-size: 14px;
-            line-height: 20px;
-            border: none;
+            font-weight: 500;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: opacity 0.2s;
         }
 
@@ -160,22 +130,15 @@
             opacity: 0.9;
         }
 
+        /* Умови використання */
         .terms {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 4px;
-            width: 100%;
-            font-weight: 400;
-            font-size: 12px;
-            line-height: 18px;
+            font-size: 14px;
+            line-height: 20px;
             text-align: center;
             color: #B3B3C5;
         }
 
         .terms a {
-            display: inline-flex;
             color: #070A1C;
             text-decoration: none;
             font-weight: 500;
@@ -184,56 +147,48 @@
         .terms a:hover {
             text-decoration: underline;
         }
-
-        .terms-text {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 4px;
-        }
     </style>
 </head>
 <body>
 
-<div class="frame">
+<div class="page">
 
-    <div class="logo-wrapper">
-        <img src="images/logo.png" alt="World IT" class="logo-image">
-        <span class="logo-text">WORLD IT</span>
+    <!-- Логотип -->
+    <div class="logo">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="World IT">
+        <span>WORLD IT</span>
+    </div>
+    <div class="chatgpt"
+        img src="{{ url_for('static', filename='chatgpt.png') }}" alt="ChatGPT">
     </div>
 
-    <div class="title-container">
-        <h1 class="title">Створити обліковий запис</h1>
-    </div>
+    <!-- Заголовок -->
+    <h1 class="title">
+        Створити обліковий запис
+    </h1>
 
+    <!-- Основний контент -->
     <div class="content">
         <p class="subtitle">
             Введіть вашу електронну пошту нижче, щоб створити обліковий запис
         </p>
 
-        <div class="form">
-            <div class="form-group">
-                <div class="input-wrapper">
-                    <input class="input" type="email" placeholder="name@example.com">
-                </div>
-                <div class="input-wrapper">
-                    <input class="input" type="password" placeholder="********">
-                </div>
-                <button class="button">
-                    Надіслати код підтвердження
-                </button>
-            </div>
-        </div>
+        <form class="form">
+            <input class="input" type="email" placeholder="name@example.com">
+            <input class="input" type="password" placeholder="********">
+
+            <button class="button" type="submit">
+                Надіслати код підтвердження
+            </button>
+        </form>
     </div>
 
-    <div class="terms">
-        <span>Натискаючи «Продовжити», ви погоджуєтеся з</span>
-        <div class="terms-text">
-            <a href="#">Умовами обслуговування</a>
-            <span>та</span>
-            <a href="#">Політикою конфіденційності</a>
-        </div>
-    </div>
+    <!-- Умови -->
+    <p class="terms">
+        Натискаючи «Продовжити», ви погоджуєтеся з
+        <a href="#">Умовами обслуговування</a> та
+        <a href="#">Політикою конфіденційності</a>
+    </p>
 
 </div>
 
