@@ -1,15 +1,222 @@
-{% extends "base.html"%}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>World IT</title>
 
-{% block title%}
-Login
-{% endblock %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-{% block content %}
-    <h1>Login</h1>
-    <a href="/main">Главная</a>
-    <form method="post">
-        <input type="email" name = "email" placeholder="Введіть пошту" required>
-        <input type="password" name = "password" placeholder="Введіть пароль" required>
-        <button>Увійти</button>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            background: #FFFFFF;
+        }
+
+        /* Головний контейнер */
+        .page {
+            width: 500px;
+            max-width: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+        }
+
+        /* Логотип */
+        .logo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo img {
+            width: 212px;
+            height: auto;
+            display: block;
+        }
+
+        .logo span {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: #070A1C;
+        }
+
+        /* Заголовок */
+        .title {
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 32px;
+            letter-spacing: -0.025em;
+            color: #070A1C;
+            text-align: center;
+        }
+
+        /* Контент */
+        .content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            line-height: 20px;
+            color: #71717A;
+            text-align: center;
+        }
+
+        /* Форма */
+        .form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .input {
+            width: 100%;
+            height: 36px;
+            padding: 4px 12px;
+            border-radius: 6px;
+            border: 1px solid #E2E1EC;
+            background: #FFFFFF;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #070A1C;
+        }
+
+        .input::placeholder {
+            color: #B3B3C5;
+        }
+
+        .input:focus {
+            outline: none;
+            border-color: #070A1C;
+        }
+
+        /* Кнопка */
+        .button {
+            height: 36px;
+            border-radius: 6px;
+            border: none;
+            background: #070A1C;
+            color: #FAF8FF;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.2s;
+        }
+
+        .button:hover {
+            opacity: 0.9;
+        }
+
+        /* Умови використання */
+        .terms {
+            font-size: 14px;
+            line-height: 20px;
+            text-align: center;
+            color: #B3B3C5;
+        }
+
+        .terms a {
+            color: #070A1C;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .terms a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+
+    
+<div class="logo" style="margin-bottom: 20px;"> 
+    <img src="{{ url_for('user_app.static', filename='logo.png') }}" style="width: 212px; height: 28px;">
+</div>
+
+
+
+
+<h1 class="title">
+    Авторизуватися
+</h1>
+
+<div class="content">
+    <p class="subtitle">
+        Введіть вашу електронну пошту нижче, щоб увійти в свій обліковий запис
+    </p>
+    
+    <form class="form" method="POST" action="/">
+    <input class="input" type="email" name="email" placeholder="name@example.com" required>
+    <input class="input" type="password" name="password" placeholder="Пароль" required>
+
+    <button class="button" type="submit">
+        Надіслати код підтвердження
+    </button>
     </form>
-{% endblock %}
+
+    </div>
+    
+    <p class="terms">
+        Натискаючи «Продовжити», ви погоджуєтеся з
+        <a href="#">Умовами обслуговування</a> та
+        <a href="#">Політикою конфіденційності</a>
+    </p>
+    
+    <div class="chatgpt" style="margin-top: 50px;"> 
+        <img src="{{ url_for('user_app.static', filename='chatgpt.png') }}" 
+             style="width: 400px; height: auto;">
+    </div>
+    <a href="/" style="text-decoration: none;">
+    <button style="
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 76px;
+        height: 36px;
+        background-color: #FFFFFF;    
+        color: #000033;             
+        border: 1px solid #E5E7EB;  
+        border-radius: 6px;      
+        padding: 8px 16px; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;                  
+        font-family: 'Inter', sans-serif;
+        font-size: 14px;
+        cursor: pointer;
+    ">
+        Реєстрація
+    </button>
+    </a>
+
+
+</div>
+
+</body>
+</html>
