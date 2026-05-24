@@ -158,35 +158,74 @@
     <img src="{{ url_for('user_app.static', filename='logo.png') }}" style="width: 212px; height: 28px;">
 </div>
 
+<div class="container">
+    <h2 class="title">Успіх</h2>
+    <p class="message">Ми надіслали вам електронний лист з магічним посиланням для підтвердження вашого облікового запису. 
+Будь ласка, перевірте свою поштову скриньку та натисніть на посилання.</p>
+</div>
 
+<style>
+    /* Container */
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0px;
+        gap: 16px;
+        width: 500px;
+        height: 160px;
+        flex: none;
+        order: 0;
+        align-self: stretch;
+        flex-grow: 0;
+    }
 
+    /* Title */
+    .title {
+        width: 59px;
+        height: 32px;
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 32px;
+        letter-spacing: -0.025em;
+        color: #070A1C;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+    }
 
-<h1 class="title">
-    Авторизуватися
-</h1>
+    /* Message */
+    .message {
+        width: 500px;
+        height: 112px;
+        font-family: 'Inter', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 28px;
+        text-align: center;
+        color: #0F172A;
+        flex: none;
+        order: 0;
+        align-self: stretch;
+        flex-grow: 0;
+    }
+</style>
 
 <div class="content">
-    <p class="subtitle">
-        Введіть вашу електронну пошту нижче, щоб увійти в свій обліковий запис
-    </p>
-    
-    <form class="form" method="POST" action="/">
-    <input class="input" type="email" name="email" placeholder="name@example.com" required>
-    <input class="input" type="password" name="password" placeholder="Пароль" required>
-
-    <button class="button" type="submit">
-        Увійти в аккаунт
-    </button>
-    </form>
-
-    </div>
-
+    <a href="https://mail.google.com/" target="_blank" class="button" style="text-decoration: none; width: 100%;">
+        Відкрити електронну пошту
+    </a>
+</div>
     
     <div class="chatgpt" style="margin-top: 50px;"> 
         <img src="{{ url_for('user_app.static', filename='chatgpt.png') }}" 
              style="width: 400px; height: auto;">
     </div>
-    <a href="/" style="text-decoration: none;">
+    <a href="/login" style="text-decoration: none;">
     <button style="
         position: absolute;
         top: 20px;
@@ -196,7 +235,7 @@
         background-color: #FFFFFF;    
         color: #000033;             
         border: 1px solid #E5E7EB;  
-        border-radius: 6px;      
+        border-radius: 6px;         
         padding: 8px 16px; 
         display: flex;
         align-items: center;
@@ -206,7 +245,7 @@
         font-size: 14px;
         cursor: pointer;
     ">
-        Реєстрація
+        Увійти
     </button>
     </a>
 

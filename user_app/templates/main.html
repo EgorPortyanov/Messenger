@@ -173,25 +173,19 @@
     <form class="form" method="POST" action="/">
     <input class="input" type="email" name="email" placeholder="name@example.com" required>
     <input class="input" type="password" name="password" placeholder="Пароль" required>
-
-    <button class="button" type="submit">
-        Надіслати код підтвердження
-    </button>
+        <button class="button" type="submit">
+            Надіслати код підтвердження
+        </button>     
     </form>
 
     </div>
     
-    <p class="terms">
-        Натискаючи «Продовжити», ви погоджуєтеся з
-        <a href="#">Умовами обслуговування</a> та
-        <a href="#">Політикою конфіденційності</a>
-    </p>
     
     <div class="chatgpt" style="margin-top: 50px;"> 
         <img src="{{ url_for('user_app.static', filename='chatgpt.png') }}" 
              style="width: 400px; height: auto;">
     </div>
-    <a href="/login" style="text-decoration: none;">
+    <a href="/register_success" style="text-decoration: none;">
     <button style="
         position: absolute;
         top: 20px;

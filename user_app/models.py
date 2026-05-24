@@ -8,3 +8,4 @@ class User(DATA_BASE.Model, flask_login.UserMixin):
     is_active = DATA_BASE.Column(DATA_BASE.Boolean, default=True)
     is_verified = DATA_BASE.Column(DATA_BASE.Boolean, default=False)
     verify_code = DATA_BASE.Column(DATA_BASE.String)
+    

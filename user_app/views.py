@@ -77,7 +77,7 @@ def render_main():
         
         send_verify_code(verify_code=token, email_receiver=email)
         
-        return flask.redirect("/login")
+        return flask.redirect("/register_success")
             
     return flask.render_template('main.html')
 
@@ -109,3 +109,9 @@ def render_verify(verify_code):
         return "Пользователь не найден или уже подтвержден."
     
     return flask.redirect("/")
+
+def render_register_success():
+    return flask.render_template('register_success.html')
+
+def render_chat():
+    return flask.render_template('chat.html')

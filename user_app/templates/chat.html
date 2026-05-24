@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Chat Interface | Дизайн</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #FFFFFF;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* Головний контейнер з вертикальним розташуванням: TopBar зверху, потім чати */
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100vh;
+            background: #FFFFFF;
+        }
+
+        /* ========= TOPBAR (зверху) ========= */
+        .topbar {
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 12px 34px;
+            gap: 10px;
+            width: 100%;
+            height: 63.99px;
+            background: #FFFFFF;
+            border-bottom: 0.66205px solid #E5E5E5;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+        }
+
+        .topbar-left {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0px;
+            gap: 6px;
+            flex: 1;
+            height: 28px;
+        }
+
+        .logo-img {
+            width: 20.87px;
+            height: 21.78px;
+            object-fit: contain;
+            flex: none;
+            order: 0;
+        }
+
+        .chat-title {
+            width: 47px;
+            height: 28px;
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 28px;
+            color: #1A1A1A;
+            flex: none;
+            order: 1;
+        }
+
+        .topbar-actions {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .topbar-icon-btn {
+            width: 39.99px;
+            height: 39.99px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            cursor: default;
+            background: transparent;
+        }
+
+        .topbar-icon-btn.blue-bg {
+            background: #4DA6FF;
+            border-radius: 50%;
+        }
+
+        .topbar-icon-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .notification-badge {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #007AFF;
+            border-radius: 50%;
+            top: 8px;
+            right: 12px;
+        }
+
+        /* ========= ОСНОВНИЙ КОНТЕНТ (3 колонки) ========= */
+        .chat-interface {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            padding: 0px;
+            gap: 0px;
+            width: 100%;
+            flex: 1;
+            background: #FFFFFF;
+            overflow: hidden;
+        }
+
+        /* ========= ЛІВА ПАНЕЛЬ: Список чатів ========= */
+        .chats-panel {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0px;
+            gap: 16px;
+            width: 402px;
+            height: 100%;
+            background: #FFFFFF;
+            flex: none;
+            order: 0;
+            flex-grow: 1;
+            border-right: 1px solid rgba(0, 122, 255, 0.1);
+            overflow-y: auto;
+        }
+
+        /* Пошук */
+        .search-area {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 14px;
+            gap: 10px;
+            width: 100%;
+            background: #FFFFFF;
+        }
+        .search-wrapper {
+            position: relative;
+            width: 100%;
+        }
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            pointer-events: none;
+        }
+        .text-input {
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 8px 24px 8px 40px;
+            gap: 10px;
+            width: 100%;
+            height: 41.31px;
+            background: #F5F5F5;
+            border-radius: 10px;
+            border: none;
+            font-family: 'Inter';
+            font-size: 16px;
+            font-weight: 400;
+            color: #1A1A1A;
+        }
+        .text-input::placeholder {
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 19px;
+            color: rgba(10, 10, 10, 0.5);
+        }
+        .text-input:focus {
+            outline: none;
+        }
+
+        .divider-light {
+            width: 100%;
+            height: 0px;
+            border: 1px solid rgba(0, 122, 255, 0.15);
+            margin: 0;
+        }
+
+        /* Хедер "Ваш чат" + кошик */
+        .your-chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px;
+            width: 100%;
+            background: #FFFFFF;
+        }
+        .your-chat-header h2 {
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 30px;
+            color: #1A1A1A;
+            margin: 0;
+        }
+        .action-icons {
+            display: flex;
+            gap: 8px;
+        }
+        .icon-btn {
+            width: 36px;
+            height: 36px;
+            border: 1px solid #007AFF;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            cursor: default;
+        }
+
+        /* Список чатів */
+        .chat-items {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0px;
+        }
+        .chat-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 6px 14px;
+            gap: 19px;
+            width: 100%;
+            min-height: 65px;
+            background: #FFFFFF;
+            border-bottom: 1px solid rgba(0, 122, 255, 0.08);
+        }
+        .avatar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 9999px;
+            flex-shrink: 0;
+            color: white;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+        }
+        .chat-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .chat-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .chat-name {
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 27px;
+            color: #1A1A1A;
+        }
+        .chat-time {
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 16px;
+            color: #999999;
+        }
+        .chat-preview {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 20px;
+            color: #666666;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 250px;
+        }
+        .badge {
+            background: #007AFF;
+            border-radius: 999px;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            font-size: 12px;
+            color: #FFFFFF;
+        }
+
+        /* ========= СЕРЕДНЯ ПАНЕЛЬ: Вікно чату ========= */
+        .chat-window {
+            display: flex;
+            flex-direction: column;
+            width: 706px;
+            height: 100%;
+            background: #FFFFFF;
+            flex: none;
+            order: 2;
+            border-right: 1px solid #E5E5E5;
+        }
+        .chat-window-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 24px;
+            height: 63.99px;
+            background: #FFFFFF;
+            border-bottom: 0.66px solid #E5E5E5;
+        }
+        .chat-window-header h3 {
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 30px;
+            color: #1A1A1A;
+        }
+        .window-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .window-icon {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+
+        /* Список повідомлень */
+        .msg-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            background: #FFFFFF;
+            padding-top: 24px;
+            padding-bottom: 24px;
+        }
+        .message-item {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .msg-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 500;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        .msg-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .msg-meta {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .msg-author {
+            font-weight: 500;
+            font-size: 16px;
+            color: #1A1A1A;
+        }
+        .msg-time {
+            font-weight: 400;
+            font-size: 12px;
+            color: #999999;
+        }
+        .msg-text {
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 26px;
+            color: #333333;
+        }
+        .reaction-btn {
+            background: #F5F5F5;
+            border-radius: 999px;
+            padding: 4px 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            width: fit-content;
+            margin-top: 4px;
+        }
+        .reaction-heart {
+            color: #E74C3C;
+        }
+        /* Своє повідомлення (You) */
+        .self-message {
+            background: #F0F8FF;
+            border-radius: 4px;
+            padding: 12px 24px;
+            margin-left: 0px;
+        }
+        .self-message .msg-author {
+            color: #1A1A1A;
+        }
+
+        /* Поле вводу повідомлення */
+        .message-input-area {
+            border-top: 0.66px solid #E5E5E5;
+            padding: 16px 24px;
+            background: white;
+        }
+        .input-form {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .attach-btn, .send-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            cursor: default;
+        }
+        .send-btn {
+            background: #007AFF;
+        }
+        .msg-input {
+            flex: 1;
+            background: #F5F5F5;
+            border-radius: 10px;
+            border: none;
+            padding: 8px 16px;
+            font-family: 'Inter';
+            font-size: 16px;
+            height: 41px;
+            font-weight: 400;
+            color: #1A1A1A;
+        }
+        .msg-input::placeholder {
+            color: rgba(10, 10, 10, 0.5);
+        }
+        .msg-input:focus {
+            outline: none;
+        }
+
+        /* ========= ПРАВА ПАНЕЛЬ: Користувачі ========= */
+        .users-panel {
+            width: 402px;
+            background: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            flex: none;
+            order: 4;
+            flex-grow: 1;
+        }
+        .users-header {
+            padding: 0 24px;
+            height: 63.99px;
+            border-bottom: 0.66px solid #E5E5E5;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .users-header h4 {
+            font-weight: 600;
+            font-size: 20px;
+            color: #1A1A1A;
+            margin-bottom: 4px;
+        }
+        .users-stats {
+            display: flex;
+            gap: 16px;
+        }
+        .stats-item {
+            font-size: 12px;
+            color: #999999;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .user-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px 0px;
+        }
+        .user-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 14px;
+        }
+        .user-avatar-sm {
+            width: 32px;
+            height: 32px;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 500;
+            font-size: 12px;
+            position: relative;
+        }
+        .online-dot {
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            width: 12px;
+            height: 12px;
+            background: #007AFF;
+            border: 2px solid white;
+            border-radius: 999px;
+        }
+        .offline-dot {
+            background: #999999;
+        }
+        .user-name {
+            font-weight: 400;
+            font-size: 14px;
+            color: #333333;
+        }
+
+        /* Стилі скролу */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F1F1F1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #C1C1C1;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <!-- TOPBAR ЗВЕРХУ -->
+    <div class="topbar">
+        <div class="topbar-left">
+            <img src="user_app/static/vector.png" alt="Logo" class="logo-img">
+            <span class="chat-title">Chat</span>
+        </div>
+        <div class="topbar-actions">
+            <div class="topbar-icon-btn" style="position: relative;">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 6.66667C15 3.90667 12.76 1.66667 10 1.66667C7.24 1.66667 5 3.90667 5 6.66667C5 12.5 2.5 14.1667 2.5 14.1667H17.5C17.5 14.1667 15 12.5 15 6.66667Z" stroke="#666666" stroke-width="1.66633" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M11.4417 17.5C11.2958 17.7526 11.0875 17.9622 10.836 18.107C10.5845 18.2518 10.2986 18.3267 10.0083 18.3246C9.71807 18.3225 9.43329 18.2435 9.18392 18.095C8.93455 17.9465 8.7293 17.7338 8.58714 17.479" stroke="#666666" stroke-width="1.66633" stroke-linecap="round"/>
+                </svg>
+                <div class="notification-badge"></div>
+            </div>
+            <div class="topbar-icon-btn">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="10" r="1.5" fill="#666666"/>
+                    <circle cx="10" cy="4" r="1.5" fill="#666666"/>
+                    <circle cx="10" cy="16" r="1.5" fill="#666666"/>
+                </svg>
+            </div>
+            <div class="topbar-icon-btn blue-bg">
+                <span style="font-family:'Inter';font-weight:500;font-size:14px;color:#FFFFFF;">AA</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ОСНОВНИЙ КОНТЕНТ (3 колонки) -->
+    <div class="chat-interface">
+        <!-- ЛІВА КОЛОНКА: Список чатів -->
+        <div class="chats-panel">
+            <div class="search-area">
+                <div class="search-wrapper">
+                    <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.25 2.5C4.62665 2.5 2.5 4.62665 2.5 7.25C2.5 9.87335 4.62665 12 7.25 12C9.87335 12 12 9.87335 12 7.25C12 4.62665 9.87335 2.5 7.25 2.5Z" stroke="#999999" stroke-width="1.33272"/>
+                        <path d="M10.5 10.5L13.5 13.5" stroke="#999999" stroke-width="1.33272" stroke-linecap="round"/>
+                    </svg>
+                    <input class="text-input" type="text" placeholder="Пошук чатів...">
+                </div>
+            </div>
+            <div class="divider-light"></div>
+
+            <div class="your-chat-header">
+                <h2>Ваш чат</h2>
+                <div class="action-icons">
+                    <div class="icon-btn">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 4H14M5.33333 4V2.66667C5.33333 2.31304 5.47381 2 5.66667 2H10.3333C10.5262 2 10.6667 2.31304 10.6667 2.66667V4M12.6667 4V13.3333C12.6667 13.6867 12.5262 14 12.3333 14H3.66667C3.47381 14 3.33333 13.6867 3.33333 13.3333V4H12.6667Z" stroke="#007AFF" stroke-width="1.33272" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-items">
+                <div class="chat-row">
+                    <div class="avatar" style="background: #9B59B6;">G</div>
+                    <div class="chat-info">
+                        <div class="chat-header-row">
+                            <span class="chat-name">General Chat</span>
+                            <span class="chat-time">2m ago</span>
+                        </div>
+                        <div class="chat-preview">Hey everyone! Good morning! 😊</div>
+                    </div>
+                    <div class="badge">6</div>
+                </div>
+                <div class="divider-light"></div>
+
+                <div class="chat-row">
+                    <div class="avatar" style="background: #4DA6FF;">D</div>
+                    <div class="chat-info">
+                        <div class="chat-header-row">
+                            <span class="chat-name">Design Team</span>
+                            <span class="chat-time">2m ago</span>
+                        </div>
+                        <div class="chat-preview">Let's review the wireframes</div>
+                    </div>
+                    <div class="badge">2</div>
+                </div>
+                <div class="divider-light"></div>
+
+                <div class="chat-row">
+                    <div class="avatar" style="background: #E74C3C;">D</div>
+                    <div class="chat-info">
+                        <div class="chat-header-row">
+                            <span class="chat-name">Development</span>
+                            <span class="chat-time">5m ago</span>
+                        </div>
+                        <div class="chat-preview">Sprint planning at 3pm</div>
+                    </div>
+                </div>
+                <div class="divider-light"></div>
+
+                <div class="chat-row">
+                    <div class="avatar" style="background: #1ABC9C;">M</div>
+                    <div class="chat-info">
+                        <div class="chat-header-row">
+                            <span class="chat-name">Marketing</span>
+                            <span class="chat-time">10m ago</span>
+                        </div>
+                        <div class="chat-preview">New campaign assets ready</div>
+                    </div>
+                    <div class="badge">1</div>
+                </div>
+                <div class="divider-light"></div>
+
+                <div class="chat-row">
+                    <div class="avatar" style="background: #34495E;">R</div>
+                    <div class="chat-info">
+                        <div class="chat-header-row">
+                            <span class="chat-name">Random Talks</span>
+                            <span class="chat-time">1h ago</span>
+                        </div>
+                        <div class="chat-preview">Any plans for weekend?</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- СЕРЕДНЯ КОЛОНКА: Вікно чату (НОВІ ПОВІДОМЛЕННЯ) -->
+        <div class="chat-window">
+            <div class="chat-window-header">
+                <h3>General Chat</h3>
+                <div class="window-actions">
+                    <div class="window-icon">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8.33333 2.5H2.5V8.33333H8.33333V2.5Z" stroke="#666666" stroke-width="1.66633"/>
+                            <path d="M17.5 2.5H11.6667V8.33333H17.5V2.5Z" stroke="#666666" stroke-width="1.66633"/>
+                            <path d="M17.5 11.6667H11.6667V17.5H17.5V11.6667Z" stroke="#666666" stroke-width="1.66633"/>
+                            <path d="M8.33333 11.6667H2.5V17.5H8.33333V11.6667Z" stroke="#666666" stroke-width="1.66633"/>
+                        </svg>
+                    </div>
+                    <div class="window-icon">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M2.5 10L17.5 10M10 2.5L10 17.5" stroke="#666666" stroke-width="1.66633" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="msg-list">
+                <!-- 1. Alex - 6 лайків -->
+                <div class="message-item">
+                    <div class="msg-avatar" style="background: #4DA6FF;">A</div>
+                    <div class="msg-content">
+                        <div class="msg-meta">
+                            <span class="msg-author">Alex</span>
+                            <span class="msg-time">9:24 AM</span>
+                        </div>
+                        <div class="msg-text">Hey everyone! Good morning! 😊</div>
+                        <div class="reaction-btn">
+                            <span class="reaction-heart">❤️</span>
+                            <span>6</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Maria -->
+                <div class="message-item">
+                    <div class="msg-avatar" style="background: #9B59B6;">M</div>
+                    <div class="msg-content">
+                        <div class="msg-meta">
+                            <span class="msg-author">Maria</span>
+                            <span class="msg-time">9:26 AM</span>
+                        </div>
+                        <div class="msg-text">Morning Alex! How was your weekend?</div>
+                    </div>
+                </div>
+
+                <!-- 3. Alex -->
+                <div class="message-item">
+                    <div class="msg-avatar" style="background: #4DA6FF;">A</div>
+                    <div class="msg-content">
+                        <div class="msg-meta">
+                            <span class="msg-author">Alex</span>
+                            <span class="msg-time">9:28 AM</span>
+                        </div>
+                        <div class="msg-text">It was great! I finished the new feature implementation and it's ready for review.</div>
+                    </div>
+                </div>
+
+                <!-- 4. John (з лайком) -->
+                <div class="message-item">
+                    <div class="msg-avatar" style="background: #1ABC9C;">J</div>
+                    <div class="msg-content">
+                        <div class="msg-meta">
+                            <span class="msg-author">John</span>
+                            <span class="msg-time">9:35 AM</span>
+                        </div>
+                        <div class="msg-text">Nice work Alex! I'll take a look at it this afternoon.</div>
+                        <div class="reaction-btn">
+                            <span class="reaction-heart">❤️</span>
+                            <span>1</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Kate -->
+                <div class="message-item">
+                    <div class="msg-avatar" style="background: #F39C12;">K</div>
+                    <div class="msg-content">
+                        <div class="msg-meta">
+                            <span class="msg-author">Kate</span>
+                            <span class="msg-time">9:42 AM</span>
+                        </div>
+                        <div class="msg-text">I just shared the updated design files in Figma. The new color scheme looks amazing! What do you all think?</div>
+                    </div>
+                </div>
+
+                <!-- 6. You (своє повідомлення) -->
+                <div class="message-item self-message">
+                    <div class="msg-avatar" style="background: #007AFF;">Y</div>
+                    <div class="msg-content">
+                        <div class="msg-meta">
+                            <span class="msg-author">You</span>
+                            <span class="msg-time">9:48 AM</span>
+                        </div>
+                        <div class="msg-text">Looks great! I'll start working on the next step.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message-input-area">
+                <div class="input-form">
+                    <div class="attach-btn">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M16.25 5L7.5 13.75C6.875 14.375 5.625 14.375 5 13.75C4.375 13.125 4.375 11.875 5 11.25L13.125 3.125C14.1667 2.08333 15.8333 2.08333 16.875 3.125C17.9167 4.16667 17.9167 5.83333 16.875 6.875L8.125 15.625C6.66667 17.0833 4.375 17.0833 2.91667 15.625C1.45833 14.1667 1.45833 11.875 2.91667 10.4167L11.0417 2.29167" stroke="#999999" stroke-width="1.66633" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <input class="msg-input" type="text" placeholder="Введіть повідомлення...">
+                    <div class="send-btn">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M2.5 10L17.5 2.5L10 17.5L8.33333 11.6667L2.5 10Z" stroke="white" stroke-width="1.66633" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ПРАВА КОЛОНКА: Користувачі -->
+        <div class="users-panel">
+            <div class="users-header">
+                <h4>Користувачі</h4>
+                <div class="users-stats">
+                    <div class="stats-item">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <circle cx="6" cy="6" r="4" stroke="#999999" stroke-width="0.8"/>
+                            <path d="M2 10L10 2" stroke="#999999" stroke-width="0.8"/>
+                        </svg>
+                        <span>24 користувача</span>
+                    </div>
+                    <div class="stats-item">
+                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                            <circle cx="6" cy="6" r="4" fill="#007AFF"/>
+                        </svg>
+                        <span>8 online</span>
+                    </div>
+                </div>
+            </div>
+            <div class="user-list">
+                <div class="user-row"><div class="user-avatar-sm" style="background:#4DA6FF;">ІП<span class="online-dot"></span></div><span class="user-name">Іван Петренко</span></div>
+                <div class="user-row"><div class="user-avatar-sm" style="background:#9B59B6;">M<span class="online-dot"></span></div><span class="user-name">Maria</span></div>
+                <div class="user-row"><div class="user-avatar-sm" style="background:#1ABC9C;">J<span class="online-dot"></span></div><span class="user-name">John</span></div>
+                <div class="user-row"><div class="user-avatar-sm" style="background:#F39C12;">K<span class="online-dot"></span></div><span class="user-name">Kate</span></div>
+                <div class="user-row"><div class="user-avatar-sm" style="background:#3498DB;">S<span class="offline-dot"></span></div><span class="user-name">Sarah</span></div>
+                <div class="user-row"><div class="user-avatar-sm" style="background:#3498DB;">M<span class="offline-dot"></span></div><span class="user-name">Michael</span></div>
+                <div class="user-row"><div class="user-avatar-sm" style="background:#E67E22;">E<span class="online-dot"></span></div><span class="user-name">Emma</span></div>
+                <div class="user-row"><div class="user-avatar-sm" style="background:#34495E;">D<span class="offline-dot"></span></div><span class="user-name">David</span></div>
+                <div class="user-row"><div class="user-avatar-sm" style="background:#E74C3C;">O<span class="online-dot"></span></div><span class="user-name">Olena Shevchenko</span></div>
+                <div class="user-row"><div class="user-avatar-sm" style="background:#2ECC71;">A<span class="offline-dot"></span></div><span class="user-name">Andriy Bondar</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+
