@@ -552,7 +552,14 @@
             border-radius: 999px;
         }
         .offline-dot {
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            width: 12px;
+            height: 12px;
             background: #999999;
+            border: 2px solid white;
+            border-radius: 999px;
         }
         .user-name {
             font-weight: 400;
@@ -605,93 +612,114 @@
     <!-- ОСНОВНИЙ КОНТЕНТ (3 колонки) -->
     <div class="chat-interface">
         <!-- ЛІВА КОЛОНКА: Список чатів -->
-        <div class="chats-panel">
-            <div class="search-area">
-                <div class="search-wrapper">
-                    <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7.25 2.5C4.62665 2.5 2.5 4.62665 2.5 7.25C2.5 9.87335 4.62665 12 7.25 12C9.87335 12 12 9.87335 12 7.25C12 4.62665 9.87335 2.5 7.25 2.5Z" stroke="#999999" stroke-width="1.33272"/>
-                        <path d="M10.5 10.5L13.5 13.5" stroke="#999999" stroke-width="1.33272" stroke-linecap="round"/>
-                    </svg>
-                    <input class="text-input" type="text" placeholder="Пошук чатів...">
-                </div>
-            </div>
-            <div class="divider-light"></div>
+        <!-- ЛІВА КОЛОНКА: Список чатів -->
+<div class="chats-panel">
+    <!-- Пошук -->
+    <div class="search-area">
+        <div class="search-wrapper">
+            <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.25 2.5C4.62665 2.5 2.5 4.62665 2.5 7.25C2.5 9.87335 4.62665 12 7.25 12C9.87335 12 12 9.87335 12 7.25C12 4.62665 9.87335 2.5 7.25 2.5Z" stroke="#999999" stroke-width="1.33272"/>
+                <path d="M10.5 10.5L13.5 13.5" stroke="#999999" stroke-width="1.33272" stroke-linecap="round"/>
+            </svg>
+            <input class="text-input" type="text" placeholder="Пошук чатів...">
+        </div>
+    </div>
+    
+    <div class="divider-light"></div>
 
-            <div class="your-chat-header">
-                <h2>Ваш чат</h2>
-                <div class="action-icons">
-                    <div class="icon-btn">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M2 4H14M5.33333 4V2.66667C5.33333 2.31304 5.47381 2 5.66667 2H10.3333C10.5262 2 10.6667 2.31304 10.6667 2.66667V4M12.6667 4V13.3333C12.6667 13.6867 12.5262 14 12.3333 14H3.66667C3.47381 14 3.33333 13.6867 3.33333 13.3333V4H12.6667Z" stroke="#007AFF" stroke-width="1.33272" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-
-            <div class="chat-items">
-                <div class="chat-row">
-                    <div class="avatar" style="background: #9B59B6;">G</div>
-                    <div class="chat-info">
-                        <div class="chat-header-row">
-                            <span class="chat-name">General Chat</span>
-                            <span class="chat-time">2m ago</span>
-                        </div>
-                        <div class="chat-preview">Hey everyone! Good morning! 😊</div>
-                    </div>
-                    <div class="badge">6</div>
-                </div>
-                <div class="divider-light"></div>
-
-                <div class="chat-row">
-                    <div class="avatar" style="background: #4DA6FF;">D</div>
-                    <div class="chat-info">
-                        <div class="chat-header-row">
-                            <span class="chat-name">Design Team</span>
-                            <span class="chat-time">2m ago</span>
-                        </div>
-                        <div class="chat-preview">Let's review the wireframes</div>
-                    </div>
-                    <div class="badge">2</div>
-                </div>
-                <div class="divider-light"></div>
-
-                <div class="chat-row">
-                    <div class="avatar" style="background: #E74C3C;">D</div>
-                    <div class="chat-info">
-                        <div class="chat-header-row">
-                            <span class="chat-name">Development</span>
-                            <span class="chat-time">5m ago</span>
-                        </div>
-                        <div class="chat-preview">Sprint planning at 3pm</div>
-                    </div>
-                </div>
-                <div class="divider-light"></div>
-
-                <div class="chat-row">
-                    <div class="avatar" style="background: #1ABC9C;">M</div>
-                    <div class="chat-info">
-                        <div class="chat-header-row">
-                            <span class="chat-name">Marketing</span>
-                            <span class="chat-time">10m ago</span>
-                        </div>
-                        <div class="chat-preview">New campaign assets ready</div>
-                    </div>
-                    <div class="badge">1</div>
-                </div>
-                <div class="divider-light"></div>
-
-                <div class="chat-row">
-                    <div class="avatar" style="background: #34495E;">R</div>
-                    <div class="chat-info">
-                        <div class="chat-header-row">
-                            <span class="chat-name">Random Talks</span>
-                            <span class="chat-time">1h ago</span>
-                        </div>
-                        <div class="chat-preview">Any plans for weekend?</div>
-                    </div>
-                </div>
+    <!-- ChatHeader з кнопкою видалення -->
+    <div class="your-chat-header">
+        <h2>Ваш чат</h2>
+        <div class="action-icons">
+            <div class="icon-btn">
+                <img src="{{ url_for('user_app.static', filename='trash-2.png') }}" alt="delete" style="width: 16px; height: 16px; object-fit: contain;">
             </div>
         </div>
+    </div>
+
+    <!-- Контейнер з чатами -->
+    <div class="chat-items">
+    <!-- Dream Team -->
+    <div class="chat-row">
+        <div class="avatar" style="background: #9B59B6;">D</div>
+        <div class="chat-info">
+            <div class="chat-header-row">
+                <span class="chat-name">Dream Team</span>
+                <span class="chat-time">15m ago</span>
+            </div>
+            <div class="chat-preview">I just shared the new mockups in Figma</div>
+        </div>
+    </div>
+    <div class="divider-light"></div>
+
+    <!-- General Chat -->
+    <div class="chat-row">
+        <div class="avatar" style="background: #4DA6FF;">G</div>
+        <div class="chat-info">
+            <div class="chat-header-row">
+                <span class="chat-name">General Chat</span>
+                <span class="chat-time">2m ago</span>
+            </div>
+            <div class="chat-preview">Hey everyone! How is the project going?</div>
+        </div>
+        <div class="badge">3</div>
+    </div>
+    <div class="divider-light"></div>
+
+    <!-- Design Team (перший) -->
+    <div class="chat-row">
+        <div class="avatar" style="background: #9B59B6;">D</div>
+        <div class="chat-info">
+            <div class="chat-header-row">
+                <span class="chat-name">Design Team</span>
+                <span class="chat-time">15m ago</span>
+            </div>
+            <div class="chat-preview">I just shared the new mockups in Figma</div>
+        </div>
+    </div>
+    <div class="divider-light"></div>
+
+    <!-- Design Team (другий) -->
+    <div class="chat-row">
+        <div class="avatar" style="background: #E74C3C;">D</div>
+        <div class="chat-info">
+            <div class="chat-header-row">
+                <span class="chat-name">Design Team</span>
+                <span class="chat-time">1h ago</span>
+            </div>
+            <div class="chat-preview">The API integration is complete ✔</div>
+        </div>
+    </div>
+    <div class="divider-light"></div>
+
+    <!-- Marketing Team -->
+    <div class="chat-row">
+        <div class="avatar" style="background: #1ABC9C;">M</div>
+        <div class="chat-info">
+            <div class="chat-header-row">
+                <span class="chat-name">Marketing Team</span>
+                <span class="chat-time">1h ago</span>
+            </div>
+            <div class="chat-preview">Great work on the campaign launch!</div>
+        </div>
+        <div class="badge">7</div>
+    </div>
+    <div class="divider-light"></div>
+
+    <!-- Random -->
+    <div class="chat-row">
+        <div class="avatar" style="background: #34495E;">R</div>
+        <div class="chat-info">
+            <div class="chat-header-row">
+                <span class="chat-name">Random</span>
+                <span class="chat-time">5h ago</span>
+            </div>
+            <div class="chat-preview">Anyone up for lunch? 🍕</div>
+        </div>
+        <div class="badge">2</div>
+    </div>
+</div>  
+</div>
 
         <!-- СЕРЕДНЯ КОЛОНКА: Вікно чату (НОВІ ПОВІДОМЛЕННЯ) -->
         <div class="chat-window">
@@ -749,7 +777,7 @@
                     <div class="msg-content">
                         <div class="msg-meta">
                             <span class="msg-author">Alex</span>
-                            <span class="msg-time">9:28 AM</span>
+                            <span class="msg-time">9:26 AM</span>
                         </div>
                         <div class="msg-text">It was great! I finished the new feature implementation and it's ready for review.</div>
                     </div>
@@ -761,7 +789,7 @@
                     <div class="msg-content">
                         <div class="msg-meta">
                             <span class="msg-author">John</span>
-                            <span class="msg-time">9:35 AM</span>
+                            <span class="msg-time">9:29 AM</span>
                         </div>
                         <div class="msg-text">Nice work Alex! I'll take a look at it this afternoon.</div>
                         <div class="reaction-btn">
@@ -777,7 +805,7 @@
                     <div class="msg-content">
                         <div class="msg-meta">
                             <span class="msg-author">Kate</span>
-                            <span class="msg-time">9:42 AM</span>
+                            <span class="msg-time">9:44 AM</span>
                         </div>
                         <div class="msg-text">I just shared the updated design files in Figma. The new color scheme looks amazing! What do you all think?</div>
                     </div>
@@ -789,7 +817,7 @@
                     <div class="msg-content">
                         <div class="msg-meta">
                             <span class="msg-author">You</span>
-                            <span class="msg-time">9:48 AM</span>
+                            <span class="msg-time">9:40 AM</span>
                         </div>
                         <div class="msg-text">Looks great! I'll start working on the next step.</div>
                     </div>
@@ -815,41 +843,70 @@
 
         <!-- ПРАВА КОЛОНКА: Користувачі -->
         <div class="users-panel">
-            <div class="users-header">
-                <h4>Користувачі</h4>
-                <div class="users-stats">
-                    <div class="stats-item">
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                            <circle cx="6" cy="6" r="4" stroke="#999999" stroke-width="0.8"/>
-                            <path d="M2 10L10 2" stroke="#999999" stroke-width="0.8"/>
-                        </svg>
-                        <span>24 користувача</span>
-                    </div>
-                    <div class="stats-item">
-                        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                            <circle cx="6" cy="6" r="4" fill="#007AFF"/>
-                        </svg>
-                        <span>8 online</span>
-                    </div>
-                </div>
+    <div class="users-header">
+        <h4>Користувачі</h4>
+        <div class="users-stats">
+            <div class="stats-item">
+                <img src="{{ url_for('user_app.static', filename='icon1.png') }}" alt="users" style="width: 12px; height: 12px; object-fit: contain;">
+                <span>24 пользователя</span>
             </div>
-            <div class="user-list">
-                <div class="user-row"><div class="user-avatar-sm" style="background:#4DA6FF;">ІП<span class="online-dot"></span></div><span class="user-name">Іван Петренко</span></div>
-                <div class="user-row"><div class="user-avatar-sm" style="background:#9B59B6;">M<span class="online-dot"></span></div><span class="user-name">Maria</span></div>
-                <div class="user-row"><div class="user-avatar-sm" style="background:#1ABC9C;">J<span class="online-dot"></span></div><span class="user-name">John</span></div>
-                <div class="user-row"><div class="user-avatar-sm" style="background:#F39C12;">K<span class="online-dot"></span></div><span class="user-name">Kate</span></div>
-                <div class="user-row"><div class="user-avatar-sm" style="background:#3498DB;">S<span class="offline-dot"></span></div><span class="user-name">Sarah</span></div>
-                <div class="user-row"><div class="user-avatar-sm" style="background:#3498DB;">M<span class="offline-dot"></span></div><span class="user-name">Michael</span></div>
-                <div class="user-row"><div class="user-avatar-sm" style="background:#E67E22;">E<span class="online-dot"></span></div><span class="user-name">Emma</span></div>
-                <div class="user-row"><div class="user-avatar-sm" style="background:#34495E;">D<span class="offline-dot"></span></div><span class="user-name">David</span></div>
-                <div class="user-row"><div class="user-avatar-sm" style="background:#E74C3C;">O<span class="online-dot"></span></div><span class="user-name">Olena Shevchenko</span></div>
-                <div class="user-row"><div class="user-avatar-sm" style="background:#2ECC71;">A<span class="offline-dot"></span></div><span class="user-name">Andriy Bondar</span></div>
+            <div class="stats-item">
+                <img src="{{ url_for('user_app.static', filename='icon1.png') }}" alt="online" style="width: 12px; height: 12px; object-fit: contain;">
+                <span>8 online</span>
             </div>
         </div>
+    </div>
+    <div class="user-list">
+        <!-- Frame 2087325366 -->
+        <div class="user-row" style="padding: 8px 14px; gap: 12px; height: 48px;">
+            <div class="user-avatar-sm" style="background:#4DA6FF; width:32px; height:32px; font-size:12px;">ІП<span class="online-dot"></span></div>
+            <span class="user-name" style="font-size:14px;">Іван Петренко</span>
+        </div>
+        
+        <!-- Frame 2087325367 -->
+        <div class="user-row" style="padding: 8px 14px; gap: 12px; height: 48px;">
+            <div class="user-avatar-sm" style="background:#9B59B6; width:32px; height:32px; font-size:12px;">M<span class="online-dot"></span></div>
+            <span class="user-name" style="font-size:14px;">Maria</span>
+        </div>
+        
+        <!-- Frame 2087325368 -->
+        <div class="user-row" style="padding: 8px 14px; gap: 12px; height: 48px;">
+            <div class="user-avatar-sm" style="background:#1ABC9C; width:32px; height:32px; font-size:12px;">J<span class="online-dot"></span></div>
+            <span class="user-name" style="font-size:14px;">John</span>
+        </div>
+        
+        <!-- Frame 2087325369 -->
+        <div class="user-row" style="padding: 8px 14px; gap: 12px; height: 48px;">
+            <div class="user-avatar-sm" style="background:#F39C12; width:32px; height:32px; font-size:12px;">K<span class="online-dot"></span></div>
+            <span class="user-name" style="font-size:14px;">Kate</span>
+        </div>
+        
+        <!-- Frame 2087325370 (offline) -->
+        <div class="user-row" style="padding: 8px 14px; gap: 12px; height: 48px;">
+            <div class="user-avatar-sm" style="background:#3498DB; width:32px; height:32px; font-size:12px;">S<span class="offline-dot"></span></div>
+            <span class="user-name" style="font-size:14px;">Sarah</span>
+        </div>
+        
+        <!-- Frame 2087325371 (offline) -->
+        <div class="user-row" style="padding: 8px 14px; gap: 12px; height: 48px;">
+            <div class="user-avatar-sm" style="background:#3498DB; width:32px; height:32px; font-size:12px;">M<span class="offline-dot"></span></div>
+            <span class="user-name" style="font-size:14px;">Michael</span>
+        </div>
+        
+        <!-- Frame 2087325372 -->
+        <div class="user-row" style="padding: 8px 14px; gap: 12px; height: 48px;">
+            <div class="user-avatar-sm" style="background:#E67E22; width:32px; height:32px; font-size:12px;">E<span class="online-dot"></span></div>
+            <span class="user-name" style="font-size:14px;">Emma</span>
+        </div>
+        
+        <!-- Frame 2087325373 (offline) -->
+        <div class="user-row" style="padding: 8px 14px; gap: 12px; height: 48px;">
+            <div class="user-avatar-sm" style="background:#34495E; width:32px; height:32px; font-size:12px;">D<span class="offline-dot"></span></div>
+            <span class="user-name" style="font-size:14px;">David</span>
+        </div>
+    </div>
+    </div>
     </div>
 </div>
 </body>
 </html>
-
-
-
