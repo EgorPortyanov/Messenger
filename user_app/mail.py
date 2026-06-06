@@ -14,12 +14,11 @@ def send_verify_code(verify_code: str, email_receiver: str):
     html_body = f"""
     <html>
     <body style="margin: 0; padding: 0; background-color: #FAF8FF; font-family: 'Inter', Helvetica, Arial, sans-serif;">
-        <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%%" style="max-width: 600px; margin: 20px auto; background-color: #FFFFFF; border-radius: 12px; border: 1px solid #E2E1EC; box-shadow: 0 4px 12px rgba(7, 10, 28, 0.05); overflow: hidden;">
+        <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; margin: 20px auto; background-color: #FFFFFF; border-radius: 12px; border: 1px solid #E2E1EC; box-shadow: 0 4px 12px rgba(7, 10, 28, 0.05); overflow: hidden;">
             
             <tr>
                 <td style="padding: 40px 30px; text-align: center;">
                     
-                    <!-- 1. Большой текст -->
                     <h1 style="
                         max-width: 546px;
                         margin: 0 auto 16px auto;
@@ -34,7 +33,6 @@ def send_verify_code(verify_code: str, email_receiver: str):
                         Вас вітає команда World IT !
                     </h1>
 
-                    <!-- 2. Маленький текст -->
                     <p style="
                         max-width: 546px;
                         margin: 0 auto 32px auto;
@@ -49,7 +47,6 @@ def send_verify_code(verify_code: str, email_receiver: str):
                         Щоб завершити реєстрацію та переконатися, що саме ви є власником цієї електронної адреси, будь ласка, підтвердіть свою пошту.
                     </p>
                     
-                    <!-- 3. Кнопка -->
                     <a href="{url}" style="
                         display: block; 
                         max-width: 546px; 
@@ -70,7 +67,6 @@ def send_verify_code(verify_code: str, email_receiver: str):
                         Підтвердити пошту
                     </a>
 
-                    <!-- 4. Картинка (Прямая ссылка) -->
                     <img src="https://i.postimg.cc/HWyGdfvZ/chatgpt.png" alt="iMessenger Иллюстрация" style="
                         display: block;
                         width: 339.55px;
@@ -81,7 +77,6 @@ def send_verify_code(verify_code: str, email_receiver: str):
                         text-decoration: none;
                     ">
                     
-                    <!-- 5. Линия-разделитель -->
                     <div style="
                         max-width: 546px;
                         margin: 24px auto;
@@ -89,7 +84,6 @@ def send_verify_code(verify_code: str, email_receiver: str):
                         height: 0px;
                     "></div>
 
-                    <!-- 6. Последний текст после линии -->
                     <p style="
                         max-width: 546px;
                         margin: 0 auto;
@@ -102,10 +96,10 @@ def send_verify_code(verify_code: str, email_receiver: str):
                         text-align: center;
                     ">
                         Якщо у вас виникнуть питання — ми завжди раді допомогти!<br style="margin-bottom: 8px;">
-                        <span style="font-weight: 500;">З найкращими побажаннями, команда World IT Academy</span>
+                        <span style="font-weight: 500;"З найкращими побажаннями, команда World IT Academy</span>
                     </p>
                     
-                </td>
+                </table>
             </tr>
             
         </table>
@@ -116,12 +110,10 @@ def send_verify_code(verify_code: str, email_receiver: str):
     message.attach(MIMEText(html_body, "html", "utf-8"))
     
     try:
-        with smtplib.SMTP(host="64.233.184.108", port=587) as smtp:
+        with smtplib.SMTP(host="smtp.gmail.com", port=587) as smtp:
             smtp.starttls()
             smtp.login("m34922908@gmail.com", "nrrnlbzowytuxqqw")
             smtp.sendmail(message["From"], message["To"], message.as_string())
             print("Лист успішно відправлено на пошту!")
     except Exception as e:
         print(f"Ошибка SMTP при отправке письма: {e}")
-
-
