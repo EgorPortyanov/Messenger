@@ -4,7 +4,15 @@ import flask_login
 from .models import User
 from .app import user_app
 from project.db import DATA_BASE
-from project.login_manager import serializer
+from itsdangerous import URLSafeTimedSerializer
+
+serializer = None
+
+@user_app.before_app_request
+def init_serializer():
+    global serializer
+    if serializer is None:
+        serializer = URLSafeTimedSerializer(flask.current_app.config["SECRET_KEY"])
 
 
 @user_app.route("/", methods=["GET", "POST"])
@@ -52,6 +60,10 @@ def render_register_success():
 
 @user_app.route("/verify/<verify_code>")
 def render_verify(verify_code):
+    global serializer
+    if serializer is None:
+        serializer = URLSafeTimedSerializer(flask.current_app.config["SECRET_KEY"])
+    
     try:
         email = serializer.loads(verify_code, salt="email-confirm", max_age=600)
     except:

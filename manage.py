@@ -1,10 +1,10 @@
-from project import project
+from project import project, socketio
+from project.db import DATA_BASE
 
 def main():
-    try:
-        project.run(debug = True, port = 5001)
-    except Exception as error:
-        print(error)
+    with project.app_context():
+        DATA_BASE.create_all()
+    socketio.run(app=project, port=5001, debug=True)
 
 if __name__ == "__main__":
-    main()  
+    main()

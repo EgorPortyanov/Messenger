@@ -1,12 +1,11 @@
-from user_app.models import User
-from .settings import *
+from .settings import project
 import flask_login
-from itsdangerous import URLSafeTimedSerializer
 
-project.secret_key = "key"
-serializer = URLSafeTimedSerializer(project.secret_key)
-login_manager = flask_login.LoginManager(project)
+login_manager = flask_login.LoginManager()
+login_manager.init_app(project)
+login_manager.login_view = "user_app.login"
 
 @login_manager.user_loader
-def load_user(id):
-    return User.query.get(id)
+def load_user(user_id):
+    from user_app.models import User
+    return User.query.get(int(user_id))

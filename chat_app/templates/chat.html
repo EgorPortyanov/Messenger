@@ -839,119 +839,118 @@
     <!-- ОСНОВНИЙ КОНТЕНТ (3 колонки) -->
     <div class="chat-interface">
         <!-- ЛІВА КОЛОНКА: Список чатів -->
-<div class="chats-panel">
-    <!-- Пошук -->
-    <div class="search-area">
-        <div class="search-wrapper">
-            <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7.25 2.5C4.62665 2.5 2.5 4.62665 2.5 7.25C2.5 9.87335 4.62665 12 7.25 12C9.87335 12 12 9.87335 12 7.25C12 4.62665 9.87335 2.5 7.25 2.5Z" stroke="#999999" stroke-width="1.33272"/>
-                <path d="M10.5 10.5L13.5 13.5" stroke="#999999" stroke-width="1.33272" stroke-linecap="round"/>
-            </svg>
-            <input class="text-input" type="text" placeholder="Пошук чатів...">
-        </div>
-    </div>
-
-    <div class="divider-light"></div>
-
-    <!-- Рядок: "Ваш чат" + кошик -->
-<div class="your-chat-header">
-    <h2>Ваш чат</h2>
-    <div class="action-icons">
-        <div class="icon-btn" id="deleteChatBtn" style="background: white; border: 1px solid #007AFF; cursor: pointer;">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M2 4H14M5.33333 4V2.66667C5.33333 2 5.99999 1.33333 6.66666 1.33333H9.33333C9.99999 1.33333 10.6667 2 10.6667 2.66667V4M12.6667 4V13.3333C12.6667 14 12 14.6667 11.3333 14.6667H4.66666C3.99999 14.6667 3.33333 14 3.33333 13.3333V4H12.6667Z" stroke="#007AFF" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-        </div>
-    </div>
-</div>
-
-    <!-- Якщо немає чату - показуємо кнопку створення -->
-    {% if not user_chat %}
-    <div style="display: flex; flex-direction: column; align-items: flex-start; padding: 0px 14px 14px 14px; width: 100%;">
-        <button id="openModalBtn" style="box-sizing: border-box; display: flex; flex-direction: row; justify-content: center; align-items: center; padding: 8px 16px; gap: 8px; width: 100%; height: 40px; border: 1px solid #007AFF; border-radius: 6px; background: white; cursor: pointer;">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 2V14M2 8H14" stroke="#007AFF" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-            <span style="font-family: 'Inter'; font-weight: 500; font-size: 14px; line-height: 20px; color: #007AFF;">Створити чат</span>
-        </button>
-    </div>
-
-    <!-- Якщо є чат - показуємо його -->
-    {% else %}
-    <div class="chat-items" style="width: 100%;">
-        <div class="chat-row">
-            <div class="avatar" style="background: #4DA6FF;">{{ user_chat.name[0].upper() }}</div>
-            <div class="chat-info">
-                <div class="chat-header-row">
-                    <span class="chat-name">{{ user_chat.name }}</span>
+        <div class="chats-panel">
+            <!-- Пошук -->
+            <div class="search-area">
+                <div class="search-wrapper">
+                    <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.25 2.5C4.62665 2.5 2.5 4.62665 2.5 7.25C2.5 9.87335 4.62665 12 7.25 12C9.87335 12 12 9.87335 12 7.25C12 4.62665 9.87335 2.5 7.25 2.5Z" stroke="#999999" stroke-width="1.33272"/>
+                        <path d="M10.5 10.5L13.5 13.5" stroke="#999999" stroke-width="1.33272" stroke-linecap="round"/>
+                    </svg>
+                    <input class="text-input" type="text" placeholder="Пошук чатів...">
                 </div>
-                <div class="chat-preview">Ваш чат</div>
+            </div>
+
+            <div class="divider-light"></div>
+
+            <!-- Рядок: "Ваш чат" + кошик -->
+            <div class="your-chat-header">
+                <h2>Ваш чат</h2>
+                <div class="action-icons">
+                    <div class="icon-btn" id="deleteChatBtn" style="background: white; border: 1px solid #007AFF; cursor: pointer;">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 4H14M5.33333 4V2.66667C5.33333 2 5.99999 1.33333 6.66666 1.33333H9.33333C9.99999 1.33333 10.6667 2 10.6667 2.66667V4M12.6667 4V13.3333C12.6667 14 12 14.6667 11.3333 14.6667H4.66666C3.99999 14.6667 3.33333 14 3.33333 13.3333V4H12.6667Z" stroke="#007AFF" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Кнопка створення чату (показується якщо немає чату) -->
+            <div style="display: flex; flex-direction: column; align-items: flex-start; padding: 0px 14px 14px 14px; width: 100%;">
+                <button id="openModalBtn" style="box-sizing: border-box; display: flex; flex-direction: row; justify-content: center; align-items: center; padding: 8px 16px; gap: 8px; width: 100%; height: 40px; border: 1px solid #007AFF; border-radius: 6px; background: white; cursor: pointer;">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 2V14M2 8H14" stroke="#007AFF" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    <span style="font-family: 'Inter'; font-weight: 500; font-size: 14px; line-height: 20px; color: #007AFF;">Створити чат</span>
+                </button>
+            </div>
+
+            <!-- Список всіх чатів -->
+            <div class="chat-items" style="width: 100%;">
+                {% for chat in all_chats %}
+                <div class="chat-row" data-chat-id="{{ chat.id }}">
+                    <div class="avatar" style="background: #4DA6FF;">{{ chat.name[0].upper() }}</div>
+                    <div class="chat-info">
+                        <div class="chat-header-row">
+                            <span class="chat-name">{{ chat.name }}</span>
+                        </div>
+                        <div class="chat-preview">Чат</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="divider-light"></div>
+
+            <!-- Інші чати (статичні з Figma) -->
+            <div class="chat-row">
+                <div class="avatar" style="background: #4DA6FF;">G</div>
+                <div class="chat-info">
+                    <div class="chat-header-row">
+                        <span class="chat-name">General Chat</span>
+                        <span class="chat-time">2m ago</span>
+                    </div>
+                    <div class="chat-preview">Hey everyone! How is the project going?</div>
+                </div>
+                <div class="badge">3</div>
+            </div>
+
+            <div class="chat-row">
+                <div class="avatar" style="background: #9B59B6;">D</div>
+                <div class="chat-info">
+                    <div class="chat-header-row">
+                        <span class="chat-name">Design Team</span>
+                        <span class="chat-time">15m ago</span>
+                    </div>
+                    <div class="chat-preview">I just shared the new mockups in Figma</div>
+                </div>
+            </div>
+
+            <div class="chat-row">
+                <div class="avatar" style="background: #E74C3C;">D</div>
+                <div class="chat-info">
+                    <div class="chat-header-row">
+                        <span class="chat-name">Design Team</span>
+                        <span class="chat-time">1h ago</span>
+                    </div>
+                    <div class="chat-preview">The API integration is complete ✔</div>
+                </div>
+            </div>
+
+            <div class="chat-row">
+                <div class="avatar" style="background: #1ABC9C;">M</div>
+                <div class="chat-info">
+                    <div class="chat-header-row">
+                        <span class="chat-name">Marketing Team</span>
+                        <span class="chat-time">1h ago</span>
+                    </div>
+                    <div class="chat-preview">Great work on the campaign launch!</div>
+                </div>
+                <div class="badge">7</div>
+            </div>
+
+            <div class="chat-row">
+                <div class="avatar" style="background: #34495E;">R</div>
+                <div class="chat-info">
+                    <div class="chat-header-row">
+                        <span class="chat-name">Random</span>
+                        <span class="chat-time">5h ago</span>
+                    </div>
+                    <div class="chat-preview">Anyone up for lunch? 🍕</div>
+                </div>
+                <div class="badge">2</div>
             </div>
         </div>
-    </div>
-    {% endif %}
-
-    <div class="divider-light"></div>
-
-    <!-- Інші чати (статичні з Figma) -->
-    <div class="chat-row">
-        <div class="avatar" style="background: #4DA6FF;">G</div>
-        <div class="chat-info">
-            <div class="chat-header-row">
-                <span class="chat-name">General Chat</span>
-                <span class="chat-time">2m ago</span>
-            </div>
-            <div class="chat-preview">Hey everyone! How is the project going?</div>
-        </div>
-        <div class="badge">3</div>
-    </div>
-
-    <div class="chat-row">
-        <div class="avatar" style="background: #9B59B6;">D</div>
-        <div class="chat-info">
-            <div class="chat-header-row">
-                <span class="chat-name">Design Team</span>
-                <span class="chat-time">15m ago</span>
-            </div>
-            <div class="chat-preview">I just shared the new mockups in Figma</div>
-        </div>
-    </div>
-
-    <div class="chat-row">
-        <div class="avatar" style="background: #E74C3C;">D</div>
-        <div class="chat-info">
-            <div class="chat-header-row">
-                <span class="chat-name">Design Team</span>
-                <span class="chat-time">1h ago</span>
-            </div>
-            <div class="chat-preview">The API integration is complete ✔</div>
-        </div>
-    </div>
-
-    <div class="chat-row">
-        <div class="avatar" style="background: #1ABC9C;">M</div>
-        <div class="chat-info">
-            <div class="chat-header-row">
-                <span class="chat-name">Marketing Team</span>
-                <span class="chat-time">1h ago</span>
-            </div>
-            <div class="chat-preview">Great work on the campaign launch!</div>
-        </div>
-        <div class="badge">7</div>
-    </div>
-
-    <div class="chat-row">
-        <div class="avatar" style="background: #34495E;">R</div>
-        <div class="chat-info">
-            <div class="chat-header-row">
-                <span class="chat-name">Random</span>
-                <span class="chat-time">5h ago</span>
-            </div>
-            <div class="chat-preview">Anyone up for lunch? 🍕</div>
-        </div>
-        <div class="badge">2</div>
-    </div>
-</div>
 
         <!-- СЕРЕДНЯ КОЛОНКА: Вікно чату -->
         <div class="chat-window">
@@ -974,7 +973,7 @@
                 </div>
             </div>
 
-            <div class="msg-list">
+            <div class="msg-list" id="realMessages">
                 <div style="padding: 20px; text-align: center; color: #999;">Виберіть чат для спілкування</div>
             </div>
 
@@ -985,12 +984,12 @@
                             <path d="M16.25 5L7.5 13.75C6.875 14.375 5.625 14.375 5 13.75C4.375 13.125 4.375 11.875 5 11.25L13.125 3.125C14.1667 2.08333 15.8333 2.08333 16.875 3.125C17.9167 4.16667 17.9167 5.83333 16.875 6.875L8.125 15.625C6.66667 17.0833 4.375 17.0833 2.91667 15.625C1.45833 14.1667 1.45833 11.875 2.91667 10.4167L11.0417 2.29167" stroke="#999999" stroke-width="1.66633" stroke-linecap="round"/>
                         </svg>
                     </div>
-                    <input class="msg-input" type="text" placeholder="Введіть повідомлення...">
-                    <div class="send-btn">
+                    <input class="msg-input" type="text" id="messageInput" placeholder="Введіть повідомлення...">
+                    <button class="send-btn" id="sendBtn">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M2.5 10L17.5 2.5L10 17.5L8.33333 11.6667L2.5 10Z" stroke="white" stroke-width="1.66633" stroke-linejoin="round"/>
                         </svg>
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>
@@ -1048,7 +1047,7 @@
     </div>
 </div>
 
-<!-- Модальне вікно -->
+<!-- Модальне вікно для створення чату -->
 <div id="cover">
     <div id="modal">
         <form method="POST" action="/create_chat" style="display: flex; flex-direction: column; gap: 16px;">
@@ -1064,6 +1063,7 @@
         </form>
     </div>
 </div>
+
 <!-- Модальне вікно для видалення чату -->
 <div id="deleteCover">
     <div id="deleteModal">
@@ -1083,6 +1083,8 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
 <script src="{{ url_for('user_app.static', filename='chat.js') }}"></script>
 </body>
 </html>
