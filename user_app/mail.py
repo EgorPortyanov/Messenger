@@ -8,9 +8,8 @@ def send_verify_code(verify_code: str, email_receiver: str):
     message["From"] = "m34922908@gmail.com"
     message["To"] = email_receiver
     message["Subject"] = "iMessenger Registration Confirm"
-
-    url = url_for("user_app.render_verify", verify_code=verify_code, _external=True)
-
+    url = url_for("user_app.render_verify", token=verify_code, _external=True)
+    image_url = url_for('user_app.static', filename='chatgpt.png', _external=True)
     html_body = f"""
     <html>
     <body style="margin: 0; padding: 0; background-color: #FAF8FF; font-family: 'Inter', Helvetica, Arial, sans-serif;">
@@ -67,7 +66,7 @@ def send_verify_code(verify_code: str, email_receiver: str):
                         Підтвердити пошту
                     </a>
 
-                    <img src="https://i.postimg.cc/HWyGdfvZ/chatgpt.png" alt="iMessenger Иллюстрация" style="
+                    <img src="{image_url}" alt="iMessenger Иллюстрация" style="
                         display: block;
                         width: 339.55px;
                         height: 288.02px;
@@ -112,7 +111,7 @@ def send_verify_code(verify_code: str, email_receiver: str):
     try:
         with smtplib.SMTP(host="smtp.gmail.com", port=587) as smtp:
             smtp.starttls()
-            smtp.login("m34922908@gmail.com", "nrrnlbzowytuxqqw")
+            smtp.login("m34922908@gmail.com", "kzxulzdnlgmianzk")
             smtp.sendmail(message["From"], message["To"], message.as_string())
             print("Лист успішно відправлено на пошту!")
     except Exception as e:

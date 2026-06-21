@@ -5,7 +5,6 @@ from .login_manager import login_manager
 from user_app.app import user_app
 from chat_app.app import chat_app
 
-# Імпортуємо сокети
 from chat_app import socket
 
 project.register_blueprint(user_app)

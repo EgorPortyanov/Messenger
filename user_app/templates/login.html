@@ -2,7 +2,8 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>World IT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>World IT - Авторизація</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
@@ -20,9 +21,10 @@
             justify-content: center;
             font-family: 'Inter', sans-serif;
             background: #FFFFFF;
+            position: relative;
         }
 
-        /* Головний контейнер */
+        /* Главный контейнер */
         .page {
             width: 500px;
             max-width: 90%;
@@ -30,6 +32,7 @@
             flex-direction: column;
             align-items: center;
             gap: 32px;
+            padding: 20px 0;
         }
 
         /* Логотип */
@@ -38,19 +41,13 @@
             flex-direction: column;
             align-items: center;
             gap: 12px;
+            margin-bottom: 20px;
         }
 
         .logo img {
             width: 212px;
-            height: auto;
+            height: 28px;
             display: block;
-        }
-
-        .logo span {
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            color: #070A1C;
         }
 
         /* Заголовок */
@@ -77,6 +74,7 @@
             line-height: 20px;
             color: #71717A;
             text-align: center;
+            width: 100%;
         }
 
         /* Форма */
@@ -130,22 +128,150 @@
             opacity: 0.9;
         }
 
-        /* Умови використання */
-        .terms {
+        /* Кнопка "Реєстрація" */
+        .register-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 76px;
+            height: 36px;
+            background-color: #FFFFFF;
+            color: #000033;
+            border: 1px solid #E5E7EB;
+            border-radius: 6px;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: 'Inter', sans-serif;
             font-size: 14px;
-            line-height: 20px;
-            text-align: center;
-            color: #B3B3C5;
-        }
-
-        .terms a {
-            color: #070A1C;
-            text-decoration: none;
             font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
         }
 
-        .terms a:hover {
+        .register-button:hover {
+            background-color: #F9FAFB;
+        }
+
+        /* Изображение внизу */
+        .chatgpt {
+            margin-top: 50px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .chatgpt img {
+            width: 400px;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Ссылка "Забули пароль?" */
+        .forgot-link {
+            font-size: 14px;
+            color: #4DA6FF;
+            text-decoration: none;
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .forgot-link:hover {
             text-decoration: underline;
+        }
+
+        /* ========== АДАПТИВ ДЛЯ ТЕЛЕФОНОВ ========== */
+        @media (max-width: 500px) {
+            body {
+                padding: 16px;
+            }
+
+            .page {
+                width: 100%;
+                max-width: 393px;
+                gap: 32px;
+                padding: 0;
+            }
+
+            .logo img {
+                width: 180px;
+                height: auto;
+            }
+
+            .title {
+                font-size: 22px;
+                line-height: 28px;
+            }
+
+            .subtitle {
+                font-size: 14px;
+                line-height: 20px;
+            }
+
+            .input {
+                height: 40px;
+                font-size: 16px;
+            }
+
+            .button {
+                height: 44px;
+                font-size: 16px;
+            }
+
+            .register-button {
+                top: 16px;
+                right: 16px;
+                width: 70px;
+                height: 32px;
+                font-size: 13px;
+                padding: 6px 12px;
+            }
+
+            .chatgpt {
+                margin-top: 30px;
+            }
+
+            .chatgpt img {
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .forgot-link {
+                font-size: 13px;
+            }
+        }
+
+        /* Для очень маленьких телефонов (iPhone SE) */
+        @media (max-width: 380px) {
+            .logo img {
+                width: 150px;
+            }
+
+            .title {
+                font-size: 20px;
+            }
+
+            .subtitle {
+                font-size: 13px;
+            }
+
+            .input {
+                height: 36px;
+                font-size: 14px;
+            }
+
+            .button {
+                height: 40px;
+                font-size: 14px;
+            }
+
+            .register-button {
+                width: 60px;
+                height: 28px;
+                font-size: 12px;
+            }
         }
     </style>
 </head>
@@ -153,63 +279,42 @@
 
 <div class="page">
 
-    
-<div class="logo" style="margin-bottom: 20px;"> 
-    <img src="{{ url_for('user_app.static', filename='logo.png') }}" style="width: 212px; height: 28px;">
-</div>
-
-
-
-
-<h1 class="title">
-    Авторизуватися
-</h1>
-
-<div class="content">
-    <p class="subtitle">
-        Введіть вашу електронну пошту нижче, щоб увійти в свій обліковий запис
-    </p>
-    
-    <form class="form" method="POST" action="/">
-    <input class="input" type="email" name="email" placeholder="name@example.com" required>
-    <input class="input" type="password" name="password" placeholder="Пароль" required>
-
-    <button class="button" type="submit">
-        Увійти в аккаунт
-    </button>
-    </form>
-
+    <!-- Логотип -->
+    <div class="logo">
+        <img src="{{ url_for('user_app.static', filename='logo.png') }}" alt="World IT Logo">
     </div>
 
-    
-    <div class="chatgpt" style="margin-top: 50px;"> 
-        <img src="{{ url_for('user_app.static', filename='chatgpt.png') }}" 
-             style="width: 400px; height: auto;">
+    <!-- Заголовок -->
+    <h1 class="title">
+        Авторизуватися
+    </h1>
+
+    <div class="content">
+        <p class="subtitle">
+            Введіть вашу електронну пошту нижче, щоб увійти в свій обліковий запис
+        </p>
+
+        <form class="form" method="POST" action="/login">
+            <input class="input" type="email" name="email" placeholder="name@example.com" required>
+            <input class="input" type="password" name="password" placeholder="Пароль" required>
+
+            <button class="button" type="submit">
+                Увійти в аккаунт
+            </button>
+        </form>
+
+        <a href="#" class="forgot-link">Забули пароль?</a>
     </div>
-    <a href="/" style="text-decoration: none;">
-    <button style="
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        width: 76px;
-        height: 36px;
-        background-color: #FFFFFF;    
-        color: #000033;             
-        border: 1px solid #E5E7EB;  
-        border-radius: 6px;      
-        padding: 8px 16px; 
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;                  
-        font-family: 'Inter', sans-serif;
-        font-size: 14px;
-        cursor: pointer;
-    ">
+
+    <!-- Изображение внизу -->
+    <div class="chatgpt">
+        <img src="{{ url_for('user_app.static', filename='chatgpt.png') }}" alt="ChatGPT Integration">
+    </div>
+
+    <!-- Кнопка "Реєстрація" -->
+    <a href="/" class="register-button">
         Реєстрація
-    </button>
     </a>
-
 
 </div>
 
