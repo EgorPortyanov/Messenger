@@ -1138,7 +1138,6 @@
     </style>
 </head>
 <body>
-
     <div class="app-container">
         <!-- TOPBAR -->
         <div class="topbar">
@@ -1153,103 +1152,118 @@
                         <path d="M15 6.66667C15 3.90667 12.76 1.66667 10 1.66667C7.24 1.66667 5 3.90667 5 6.66667C5 12.5 2.5 14.1667 2.5 14.1667H17.5C17.5 14.1667 15 12.5 15 6.66667Z" stroke="#666666" stroke-width="1.66633" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M11.4417 17.5C11.2958 17.7526 11.0875 17.9622 10.836 18.107C10.5845 18.2518 10.2986 18.3267 10.0083 18.3246C9.71807 18.3225 9.43329 18.2435 9.18392 18.095C8.93455 17.9465 8.7293 17.7338 8.58714 17.479" stroke="#666666" stroke-width="1.66633" stroke-linecap="round"/>
                     </svg>
-                <div class="notification-badge"></div>
-            </div>
-            <div class="topbar-icon-btn" id="settingsBtn" style="position: relative; display: flex; align-items: center; justify-content: center;">
-                <img src="{{ url_for('user_app.static', filename='settings.png') }}" alt="Settings" style="width: 20px; height: 20px; object-fit: contain; cursor: pointer;">
-            </div>
-            <div class="topbar-icon-btn blue-bg">
-                <span style="font-family:'Inter';font-weight:500;font-size:14px;color:#FFFFFF;">AA</span>
+                    <div class="notification-badge"></div>
+                </div>
+                <div class="topbar-icon-btn" id="settingsBtn" style="position: relative; display: flex; align-items: center; justify-content: center;">
+                    <img src="{{ url_for('user_app.static', filename='settings.png') }}" alt="Settings" style="width: 20px; height: 20px; object-fit: contain; cursor: pointer;">
+                </div>
+                <div class="topbar-icon-btn blue-bg">
+                    <span style="font-family:'Inter';font-weight:500;font-size:14px;color:#FFFFFF;">AA</span>
+                </div>
             </div>
         </div>
-        </div>
+
         <!-- ОСНОВНИЙ КОНТЕНТ -->
         <div class="chat-interface">
             <!-- ЛІВА КОЛОНКА: Список чатів -->
-<div class="chats-panel" id="chatsPanel">
-    <!-- Шапка лівої панелі зі стрілкою назад (тільки на телефоні) -->
-    <div class="your-chat-header mobile-back" id="chatsBack" style="display: none;">
-        <div class="back-arrow">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15 19L8 12L15 5" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </div>
-        <h2>Чати</h2>
-    </div>
+            <div class="chats-panel" id="chatsPanel">
+                <!-- Шапка лівої панелі зі стрілкою назад (тільки на телефоні) -->
+                <div class="your-chat-header mobile-back" id="chatsBack" style="display: none;">
+                    <div class="back-arrow">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 19L8 12L15 5" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h2>Чати</h2>
+                </div>
 
-    <!-- Пошук -->
-    <div class="search-area">
-        <div class="search-wrapper">
-            <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M7.25 2.5C4.62665 2.5 2.5 4.62665 2.5 7.25C2.5 9.87335 4.62665 12 7.25 12C9.87335 12 12 9.87335 12 7.25C12 4.62665 9.87335 2.5 7.25 2.5Z" stroke="#999999" stroke-width="1.33272"/>
-                <path d="M10.5 10.5L13.5 13.5" stroke="#999999" stroke-width="1.33272" stroke-linecap="round"/>
-            </svg>
-            <input class="text-input" type="text" placeholder="Пошук чатів...">
-        </div>
-    </div>
+                <!-- Пошук -->
+                <div class="search-area">
+                    <div class="search-wrapper">
+                        <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.25 2.5C4.62665 2.5 2.5 4.62665 2.5 7.25C2.5 9.87335 4.62665 12 7.25 12C9.87335 12 12 9.87335 12 7.25C12 4.62665 9.87335 2.5 7.25 2.5Z" stroke="#999999" stroke-width="1.33272"/>
+                            <path d="M10.5 10.5L13.5 13.5" stroke="#999999" stroke-width="1.33272" stroke-linecap="round"/>
+                        </svg>
+                        <input class="text-input" type="text" placeholder="Пошук чатів...">
+                    </div>
+                </div>
 
-    <div class="divider-light"></div>
+                <div class="divider-light"></div>
 
-        <!-- Заголовок "Ваш чат" + корзина -->
-    <div class="your-chat-header">
-        <h2>Ваш чат</h2>
-        <div class="action-icons">
-            <div class="icon-btn" id="deleteChatBtn">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://w3.org">
-                    <path d="M2 4H14M5.33333 4V2.66667C5.33333 2 5.99999 1.33333 6.66666 1.33333H9.33333C9.99999 1.33333 10.6667 2 10.6667 2.66667V4M12.6667 4V13.3333C12.6667 14 12 14.6667 11.3333 14.6667H4.66666C3.99999 14.6667 3.33333 14 3.33333 13.3333V4H12.6667Z" stroke="#007AFF" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-            </div>
-        </div>
-    </div>
+                <!-- Заголовок "Ваш чат" + корзина -->
+                <div class="your-chat-header">
+                    <h2>Ваш чат</h2>
+                    <div class="action-icons">
+                        <div class="icon-btn" id="deleteChatBtn">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://w3.org">
+                                <path d="M2 4H14M5.33333 4V2.66667C5.33333 2 5.99999 1.33333 6.66666 1.33333H9.33333C9.99999 1.33333 10.6667 2 10.6667 2.66667V4M12.6667 4V13.3333C12.6667 14 12 14.6667 11.3333 14.6667H4.66666C3.99999 14.6667 3.33333 14 3.33333 13.3333V4H12.6667Z" stroke="#007AFF" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
 
-    <!-- Кнопка создания чата: ПОКАЗЫВАЕТСЯ ТОЛЬКО ЕСЛИ СВОЕГО ЧАТА ЕЩЕ НЕТ -->
-    {% if not my_chat %}
-    <div style="display: flex; flex-direction: column; align-items: flex-start; padding: 0px 14px 14px 14px; width: 100%;">
-        <button id="openModalBtn" style="box-sizing: border-box; display: flex; flex-direction: row; justify-content: center; align-items: center; padding: 8px 16px; gap: 8px; width: 100%; height: 40px; border: 1px solid #007AFF; border-radius: 6px; background: white; cursor: pointer;">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://w3.org">
-                <path d="M8 2V14M2 8H14" stroke="#007AFF" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-            <span style="font-family: 'Inter'; font-weight: 500; font-size: 14px; line-height: 20px; color: #007AFF;">Створити чат</span>
-        </button>
-    </div>
-    {% endif %}
+                <!-- Кнопка создания чата: ПОКАЗЫВАЕТСЯ ТОЛЬКО ЕСЛИ СВОЕГО ЧАТА ЕЩЕ НЕТ -->
+                {% if not my_chat %}
+                <div style="display: flex; flex-direction: column; align-items: flex-start; padding: 0px 14px 14px 14px; width: 100%;">
+                    <button id="openModalBtn" style="box-sizing: border-box; display: flex; flex-direction: row; justify-content: center; align-items: center; padding: 8px 16px; gap: 8px; width: 100%; height: 40px; border: 1px solid #007AFF; border-radius: 6px; background: white; cursor: pointer;">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://w3.org">
+                            <path d="M8 2V14M2 8H14" stroke="#007AFF" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        <span style="font-family: 'Inter'; font-weight: 500; font-size: 14px; line-height: 20px; color: #007AFF;">Створити чат</span>
+                    </button>
+                </div>
+                {% endif %}
 
-    <!-- Блок чатов -->
-    <div class="chat-items" style="width: 100%;">
-        
-        <!-- 1. ВЫВОДИМ МОЙ ЛИЧНЫЙ ЧАТ (ЕСЛИ ОН ЕСТЬ) -->
-        {% if my_chat %}
-        <div class="chat-row" data-chat-id="{{ my_chat.id }}" data-chat-admin="{{ my_chat.admin_id }}" style="border-bottom: none;">
-            <!-- Фиолетовая аватарка для личного чата, как на макете -->
-            <div class="avatar" style="background: #9B59B6;">{{ my_chat.name[0].upper() }}</div>
-            <div class="chat-info">
-                <div class="chat-header-row">
-                    <span class="chat-name">{{ my_chat.name }}</span>
+                <!-- Список ВСІХ чатів з БД -->
+                <div class="chat-items" style="width: 100%;">
+                    <!-- 1. ВЫВОДИМ МОЙ ЛИЧНЫЙ ЧАТ -->
+                    {% if my_chat %}
+                    <div class="chat-row" data-chat-id="{{ my_chat.id }}" data-chat-admin="{{ my_chat.admin_id }}" style="border-bottom: none;">
+                        <div class="avatar" style="background: #9B59B6;">{{ my_chat.name.upper() }}</div>
+                        <div class="chat-info">
+                            <div class="chat-header-row">
+                                <span class="chat-name">{{ my_chat.name }}</span>
+                                <span class="chat-time" data-chat-time-id="{{ my_chat.id }}" style="font-weight: 500; font-size: 12px; color: #999999;">
+                                    {% set last_msg = my_chat.get_last_message() %}
+                                    {{ last_msg.get_time_ago() if last_msg else '' }}
+                                </span>
+                            </div>
+                            <div class="chat-preview" data-chat-preview-id="{{ my_chat.id }}" style="font-weight: 500; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px;{% if not last_msg %} color: #999999; font-style: italic;{% else %} color: #666666;{% endif %}">
+                                {{ last_msg.text if last_msg else 'Немає повідомлень' }}
+                            </div>
+                        </div>
+                        {% set unread_count = my_chat.get_unread_count(current_user.id) if my_chat.get_unread_count else 0 %}
+                        <div class="badge" id="badge-{{ my_chat.id }}" {% if unread_count > 0 %}style="display: flex;"{% else %}style="display: none;"{% endif %}>
+                            {{ unread_count }}
+                        </div>
+                    </div>
+                    <div class="divider-light" style="margin: 8px 0; width: 100%;"></div>
+                    {% endif %}
+
+                    <!-- 2. ВЫВОДИМ ВСЕ ОСТАЛЬНЫЕ ЧАТЫ -->
+                    {% for chat in other_chats %}
+                    <div class="chat-row" data-chat-id="{{ chat.id }}" data-chat-admin="{{ chat.admin_id }}">
+                        <div class="avatar" style="background: #4DA6FF;">{{ chat.name.upper() }}</div>
+                        <div class="chat-info">
+                            <div class="chat-header-row">
+                                <span class="chat-name">{{ chat.name }}</span>
+                                <span class="chat-time" data-chat-time-id="{{ chat.id }}" style="font-weight: 500; font-size: 12px; color: #999999;">
+                                    {% set last_msg = chat.get_last_message() %}
+                                    {{ last_msg.get_time_ago() if last_msg else '' }}
+                                </span>
+                            </div>
+                            <div class="chat-preview" data-chat-preview-id="{{ chat.id }}" style="font-weight: 500; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; {% if not last_msg %}color: #999999; font-style: italic;{% else %}color: #666666;{% endif %}">
+                                {{ last_msg.text if last_msg else 'Немає повідомлень' }}
+                            </div>
+                        </div>
+                        {% set unread_count = chat.get_unread_count(current_user.id) if chat.get_unread_count else 0 %}
+                        <div class="badge" id="badge-{{ chat.id }}" {% if unread_count > 0 %}style="display: flex;"{% else %}style="display: none;"{% endif %}>
+                            {{ unread_count }}
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
-        </div>
-        
-        <!-- Разделительная линия между моим чатом и остальными -->
-        <div class="divider-light" style="margin: 8px 0; width: 100%;"></div>
-        {% endif %}
-
-        <!-- 2. ВЫВОДИМ ВСЕ ОСТАЛЬНЫЕ ЧАТЫ -->
-        {% for chat in other_chats %}
-        <div class="chat-row" data-chat-id="{{ chat.id }}" data-chat-admin="{{ chat.admin_id }}">
-            <!-- Синяя аватарка для чужих чатов -->
-            <div class="avatar" style="background: #4DA6FF;">{{ chat.name[0].upper() }}</div>
-            <div class="chat-info">
-                <div class="chat-header-row">
-                    <span class="chat-name">{{ chat.name }}</span>
-                    <span class="chat-time"></span>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-
-    </div>
-</div>
-
 
             <!-- СЕРЕДНЯ ПАНЕЛЬ -->
             <div class="chat-window">
@@ -1262,14 +1276,12 @@
                                 <path d="M21 21L16.65 16.65" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
-    
-
                         <div class="window-icon" id="chatMenuBtn" style="cursor: pointer; display: flex; align-items: center; justify-content: center;">
-                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://w3.org">
-                                    <path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://w3.org">
+                                <path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6Z" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20Z" stroke="#666666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
                         </div>
                     </div>
                 </div>
@@ -1383,12 +1395,9 @@
                     <div class="modal-header" style="display: flex; justify-content: flex-end; padding: 0; width: 100%;">
                         <button class="close-modal" id="closeProfileModalBtn" style="font-size: 20px; background: none; border: none; cursor: pointer; color: #999999;">&times;</button>
                     </div>
-                    <div class="profile-avatar" id="profileAvatar" style="width: 56px; height: 56px; background: #4DA6FF; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px auto; font-weight: 500; font-size: 20px; color: white; position: relative;">
-                        <!-- Инициалы и статус-дот вставит JS -->
-                    </div>
+                    <div class="profile-avatar" id="profileAvatar" style="width: 56px; height: 56px; background: #4DA6FF; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px auto; font-weight: 500; font-size: 20px; color: white; position: relative;"></div>
                     <div class="profile-name" id="profileName" style="font-weight: 600; font-size: 16px; text-align: center; color: #1A1A1A; margin-bottom: 2px;"></div>
                     <div class="profile-username" id="profileUsername" style="font-weight: 500; font-size: 13px; text-align: center; color: #007AFF; margin-bottom: 16px;"></div>
-                    
                     <div class="profile-field" style="margin-bottom: 12px; width: 100%;">
                         <label style="font-weight: 400; font-size: 11px; color: #999999; display: block; margin-bottom: 2px;">Дата народження</label>
                         <div class="value" id="profileBirthDate" style="font-weight: 500; font-size: 14px; color: #1A1A1A;"></div>
@@ -1437,85 +1446,78 @@
         </div>
     </div>
 
-    <!-- СТАРЫЙ profileCover УДАЛЕН! Он перенесен в правую панель -->
-
     <!-- Модальне вікно налаштувань -->
-<div id="settingsCover">
-    <div id="settingsModal">
-        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-            <h3 style="font-family: 'Inter'; font-weight: 600; font-size: 18px; line-height: 22px; color: #0D133F; margin: 0;">Налаштування</h3>
-            <button class="close-modal" id="closeSettingsBtn">&times;</button>
-        </div>
+    <div id="settingsCover">
+        <div id="settingsModal">
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                <h3 style="font-family: 'Inter'; font-weight: 600; font-size: 18px; line-height: 22px; color: #0D133F; margin: 0;">Налаштування</h3>
+                <button class="close-modal" id="closeSettingsBtn">&times;</button>
+            </div>
 
-        <div style="width: 100%; height: 1px; border: 1px solid rgba(0, 122, 255, 0.15);"></div>
+            <div style="width: 100%; height: 1px; border: 1px solid rgba(0, 122, 255, 0.15);"></div>
 
-        <!-- Аватар та кнопки -->
-        <div style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
-            <div style="font-weight: 500; font-size: 16px; line-height: 16px; color: #070A1C;">Фото профілю</div>
-            <div style="display: flex; align-items: center; gap: 24px;">
-                <div id="settingsAvatar" style="width: 64px; height: 64px; background: #4DA6FF; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; color: white; font-weight: 500;">AA</div>
-                <div style="display: flex; gap: 8px;">
-                    <button style="padding: 8px 16px; border: 1px solid #007AFF; border-radius: 6px; background: white; cursor: pointer; font-family: 'Inter'; font-weight: 500; font-size: 14px; color: #007AFF;">Змінити фото</button>
-                    <button style="padding: 8px 16px; border: 1px solid #E2E1EC; border-radius: 6px; background: white; cursor: pointer; font-family: 'Inter'; font-weight: 500; font-size: 14px; color: #0D133F; opacity: 0.5;">Видалити</button>
+            <div style="display: flex; flex-direction: column; gap: 10px; width: 100%;">
+                <div style="font-weight: 500; font-size: 16px; line-height: 16px; color: #070A1C;">Фото профілю</div>
+                <div style="display: flex; align-items: center; gap: 24px;">
+                    <div id="settingsAvatar" style="width: 64px; height: 64px; background: #4DA6FF; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; color: white; font-weight: 500;">AA</div>
+                    <div style="display: flex; gap: 8px;">
+                        <button style="padding: 8px 16px; border: 1px solid #007AFF; border-radius: 6px; background: white; cursor: pointer; font-family: 'Inter'; font-weight: 500; font-size: 14px; color: #007AFF;">Змінити фото</button>
+                        <button style="padding: 8px 16px; border: 1px solid #E2E1EC; border-radius: 6px; background: white; cursor: pointer; font-family: 'Inter'; font-weight: 500; font-size: 14px; color: #0D133F; opacity: 0.5;">Видалити</button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div style="width: 100%; height: 1px; border: 1px solid rgba(0, 122, 255, 0.15);"></div>
+            <div style="width: 100%; height: 1px; border: 1px solid rgba(0, 122, 255, 0.15);"></div>
 
-        <!-- Поля форми -->
-        <div style="display: flex; flex-direction: column; gap: 16px; width: 100%;">
-            <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
-                <label style="font-weight: 500; font-size: 14px; line-height: 14px; color: #1A1A1A;">Ім'я</label>
-                <input type="text" id="settingsName" placeholder="Введіть ім'я" style="width: 100%; padding: 8px 16px; border: 1px solid #E4E4E7; border-radius: 6px; font-family: 'Inter'; font-size: 14px;">
+            <div style="display: flex; flex-direction: column; gap: 16px; width: 100%;">
+                <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                    <label style="font-weight: 500; font-size: 14px; line-height: 14px; color: #1A1A1A;">Ім'я</label>
+                    <input type="text" id="settingsName" placeholder="Введіть ім'я" style="width: 100%; padding: 8px 16px; border: 1px solid #E4E4E7; border-radius: 6px; font-family: 'Inter'; font-size: 14px;">
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                    <label style="font-weight: 500; font-size: 14px; line-height: 14px; color: #1A1A1A;">Прізвище</label>
+                    <input type="text" id="settingsSurname" placeholder="Введіть прізвище" style="width: 100%; padding: 8px 16px; border: 1px solid #E4E4E7; border-radius: 6px; font-family: 'Inter'; font-size: 14px;">
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                    <label style="font-weight: 500; font-size: 14px; line-height: 14px; color: #1A1A1A;">Ім'я користувача</label>
+                    <input type="text" id="settingsUsername" placeholder="@username" style="width: 100%; padding: 8px 16px; border: 1px solid #E4E4E7; border-radius: 6px; font-family: 'Inter'; font-size: 14px;">
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                    <label style="font-weight: 500; font-size: 14px; line-height: 14px; color: #1A1A1A;">Стать</label>
+                    <select id="settingsGender" style="width: 100%; padding: 8px 16px; border: 1px solid #E4E4E7; border-radius: 6px; font-family: 'Inter'; font-size: 14px;">
+                        <option value="">Оберіть стать</option>
+                        <option value="Чоловіча">Чоловіча</option>
+                        <option value="Жіноча">Жіноча</option>
+                        <option value="Інша">Інша</option>
+                    </select>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                    <label style="font-weight: 500; font-size: 14px; line-height: 14px; color: #1A1A1A;">Дата народження</label>
+                    <input type="date" id="settingsBirthDate" style="width: 100%; padding: 8px 16px; border: 1px solid #E4E4E7; border-radius: 6px; font-family: 'Inter'; font-size: 14px;">
+                </div>
             </div>
-            <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
-                <label style="font-weight: 500; font-size: 14px; line-height: 14px; color: #1A1A1A;">Прізвище</label>
-                <input type="text" id="settingsSurname" placeholder="Введіть прізвище" style="width: 100%; padding: 8px 16px; border: 1px solid #E4E4E7; border-radius: 6px; font-family: 'Inter'; font-size: 14px;">
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
-                <label style="font-weight: 500; font-size: 14px; line-height: 14px; color: #1A1A1A;">Ім'я користувача</label>
-                <input type="text" id="settingsUsername" placeholder="@username" style="width: 100%; padding: 8px 16px; border: 1px solid #E4E4E7; border-radius: 6px; font-family: 'Inter'; font-size: 14px;">
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
-                <label style="font-weight: 500; font-size: 14px; line-height: 14px; color: #1A1A1A;">Стать</label>
-                <select id="settingsGender" style="width: 100%; padding: 8px 16px; border: 1px solid #E4E4E7; border-radius: 6px; font-family: 'Inter'; font-size: 14px;">
-                    <option value="">Оберіть стать</option>
-                    <option value="Чоловіча">Чоловіча</option>
-                    <option value="Жіноча">Жіноча</option>
-                    <option value="Інша">Інша</option>
-                </select>
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
-                <label style="font-weight: 500; font-size: 14px; line-height: 14px; color: #1A1A1A;">Дата народження</label>
-                <input type="date" id="settingsBirthDate" style="width: 100%; padding: 8px 16px; border: 1px solid #E4E4E7; border-radius: 6px; font-family: 'Inter'; font-size: 14px;">
-            </div>
-        </div>
 
-        <div style="width: 100%; height: 1px; border: 1px solid rgba(0, 122, 255, 0.15);"></div>
+            <div style="width: 100%; height: 1px; border: 1px solid rgba(0, 122, 255, 0.15);"></div>
 
-        <!-- Кнопка "Вийти" -->
-        <div style="width: 100%;">
-            <button id="logoutBtn" style="display: flex; align-items: center; gap: 8px; background: none; border: none; cursor: pointer; padding: 0; font-family: 'Inter'; font-weight: 500; font-size: 14px; color: #09090B;">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M2 4H14M5.33333 4V2.66667C5.33333 2 5.99999 1.33333 6.66666 1.33333H9.33333C9.99999 1.33333 10.6667 2 10.6667 2.66667V4M12.6667 4V13.3333C12.6667 14 12 14.6667 11.3333 14.6667H4.66666C3.99999 14.6667 3.33333 14 3.33333 13.3333V4H12.6667Z" stroke="#09090B" stroke-width="1.5" stroke-linecap="round"/>
-                </svg>
-                Вийти з акаунта
-            </button>
-        </div>
+            <div style="width: 100%;">
+                <button id="logoutBtn" style="display: flex; align-items: center; gap: 8px; background: none; border: none; cursor: pointer; padding: 0; font-family: 'Inter'; font-weight: 500; font-size: 14px; color: #09090B;">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M2 4H14M5.33333 4V2.66667C5.33333 2 5.99999 1.33333 6.66666 1.33333H9.33333C9.99999 1.33333 10.6667 2 10.6667 2.66667V4M12.6667 4V13.3333C12.6667 14 12 14.6667 11.3333 14.6667H4.66666C3.99999 14.6667 3.33333 14 3.33333 13.3333V4H12.6667Z" stroke="#09090B" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    Вийти з акаунта
+                </button>
+            </div>
 
-        <div style="width: 100%; height: 1px; border: 1px solid rgba(0, 122, 255, 0.15);"></div>
+            <div style="width: 100%; height: 1px; border: 1px solid rgba(0, 122, 255, 0.15);"></div>
 
-        <!-- Кнопки -->
-        <div style="display: flex; justify-content: flex-end; gap: 16px; width: 100%;">
-            <button class="btn-cancel" id="cancelSettingsBtn">Скасувати</button>
-            <button class="btn-create" id="saveSettingsBtn">Зберегти</button>
+            <div style="display: flex; justify-content: flex-end; gap: 16px; width: 100%;">
+                <button class="btn-cancel" id="cancelSettingsBtn">Скасувати</button>
+                <button class="btn-create" id="saveSettingsBtn">Зберегти</button>
+            </div>
         </div>
     </div>
-</div>
 
     <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
     <script src="{{ url_for('user_app.static', filename='chat.js') }}"></script>
-
 </body>
 </html>

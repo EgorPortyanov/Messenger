@@ -11,14 +11,13 @@ from datetime import datetime
 @chat_app.route("/chat")
 def render_chat():
     user = flask_login.current_user
-    
     if not user.is_authenticated:
         return flask.redirect("/login")
     
     my_chat = Chat.query.filter_by(admin_id=user.id).first()
     other_chats = Chat.query.filter(Chat.admin_id != user.id, Chat.admin_id != 0).all()
         
-    return flask.render_template('chat.html', my_chat=my_chat, other_chats=other_chats)
+    return flask.render_template('chat.html', my_chat=my_chat, other_chats=other_chats, current_user=user)
 
 
 
@@ -63,31 +62,44 @@ def delete_chat():
 @chat_app.route("/get_messages/")
 def get_messages():
     chat_id = flask.request.args.get("chat_id")
+    user = flask_login.current_user
     if not chat_id:
         return flask.jsonify([])
     try:
         chat_id_int = int(chat_id)
         all_messages = Message.query.filter_by(chat_id=chat_id_int).all()
+        if user.is_authenticated:
+            for message in all_messages:
+                if message.sender_id != user.id:
+                    message.is_read = True
+            DATA_BASE.session.commit()
+
         list_messages = []
         for message in all_messages:
             sender = User.query.get(message.sender_id)
             if sender:
                 if sender.name and sender.surname:
-                    sender_name = f"{sender.name} {sender.surname}"
+                    sender_name = f"{sender.name} {sender.surname}".strip()
                 elif sender.name:
                     sender_name = sender.name
                 else:
                     sender_name = f"User {sender.id}"
             else:
                 sender_name = "Користувач"
+            
+            time_str = message.timestamp.strftime("%H:%M") if message.timestamp else ""
+            first_letter = sender_name[0].upper() if sender_name else "U"
             list_messages.append({
                 "text": message.text,
-                "sender": sender_name
+                "sender": sender_name,
+                "time": time_str,
+                "avatar_letter": first_letter
             })
         return flask.jsonify(list_messages)
     except Exception as e:
         print(f"Помилка: {e}")
         return flask.jsonify([])
+
 
 from datetime import datetime
 

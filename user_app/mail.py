@@ -9,7 +9,6 @@ def send_verify_code(verify_code: str, email_receiver: str):
     message["To"] = email_receiver
     message["Subject"] = "iMessenger Registration Confirm"
     url = url_for("user_app.render_verify", token=verify_code, _external=True)
-    image_url = url_for('user_app.static', filename='chatgpt.png', _external=True)
     html_body = f"""
     <html>
     <body style="margin: 0; padding: 0; background-color: #FAF8FF; font-family: 'Inter', Helvetica, Arial, sans-serif;">
@@ -66,7 +65,7 @@ def send_verify_code(verify_code: str, email_receiver: str):
                         Підтвердити пошту
                     </a>
 
-                    <img src="{image_url}" alt="iMessenger Иллюстрация" style="
+                    <img src="https://i.postimg.cc/brWSKFFB/photo-2026-06-23-14-50-23.jpg" alt="iMessenger Иллюстрация" style="
                         display: block;
                         width: 339.55px;
                         height: 288.02px;

@@ -112,36 +112,40 @@ def handle_connect_chat(chat_id):
 
 @socketio.on("send")
 def handle_send_message(data):
-    if not flask_login.current_user.is_authenticated:
-        socketio.emit("force_redirect", {"url": "/register"}, to=flask.request.sid)
-        return
-
     if not isinstance(data, dict):
         return
     text = data.get("text")
     chat_id = data.get("chat_id")
-
+    
     if not chat_id or not text:
         return
-
+        
     chat_id = int(chat_id)
     room_name = f"chat_{chat_id}"
     user = flask_login.current_user
-
-    message = Message(text=text, sender_id=user.id, chat_id=chat_id)
-    sender_name = f"User {user.id}"
-
+    
+    if user.is_authenticated:
+        message = Message(text=text, sender_id=user.id, chat_id=chat_id)
+        sender_name = f"{user.name} {user.surname}".strip() or f"User {user.id}"
+    else:
+        message = Message(text=text, sender_id=1, chat_id=chat_id)
+        sender_name = "Користувач"
+        
     DATA_BASE.session.add(message)
     DATA_BASE.session.commit()
 
     socketio.emit("receive_message", {
         "text": text,
         "sender": sender_name,
-        "message_id": message.id
+        "message_id": message.id,
+        "chat_id": chat_id
     }, to=room_name)
 
-    flask.session.pop(f"draft_{chat_id}", None)
-    flask.session.modified = True
+    socketio.emit("global_new_message", {
+        "chat_id": chat_id,
+        "text": text
+    }, to="online")
+
 
 
 @socketio.on("save_draft")

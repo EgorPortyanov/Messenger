@@ -73,16 +73,62 @@ if (sendBtn) {
 socket.on("receive_message", (data) => {
     console.log("Отримано повідомлення:", data);
     
-    const newMessage = document.createElement("div");
-    newMessage.className = "message-item";
-    let senderName = data.sender;
-    if (senderName === "test@test.com") {
-        senderName = "Користувач";
+    const activeChatId = localStorage.getItem("active_chat_id");
+    
+        if (String(data.chat_id) === String(activeChatId)) {
+        const newMessage = document.createElement("div");
+        newMessage.className = "message-item";
+        
+        let senderName = data.sender;
+        if (senderName === "test@test.com") senderName = "Користувач";
+        const now = new Date();
+        const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+        const firstLetter = senderName.charAt(0).toUpperCase();
+        newMessage.innerHTML = `
+            <div class="msg-avatar" style="background: #4DA6FF; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 500;">${firstLetter}</div>
+            <div class="msg-content" style="display: flex; flex-direction: column; gap: 4px;">
+                <div class="msg-meta" style="display: flex; align-items: center; gap: 8px;">
+                    <span class="msg-author" style="font-weight: 600; color: #1A1A1A; font-size: 15px;">${senderName}</span>
+                    <span class="msg-time" style="color: #999999; font-size: 12px;">${timeStr}</span>
+                </div>
+                <div class="msg-text" style="color: #333333; font-size: 15px; line-height: 22px;">${data.text}</div>
+            </div>
+        `;
+        messageContainer.appendChild(newMessage);
+        messageContainer.scrollTop = messageContainer.scrollHeight;
     }
-    newMessage.innerHTML = `<div class="msg-text"><strong>${senderName}:</strong> ${data.text}</div>`;
-    messageContainer.appendChild(newMessage);
-    messageContainer.scrollTop = messageContainer.scrollHeight;
+
 });
+
+socket.on("global_new_message", (data) => {
+    console.log("Глобальне сповіщення про повідомлення:", data);
+    
+    const activeChatId = localStorage.getItem("active_chat_id");
+    
+    const previewEl = document.querySelector(`[data-chat-preview-id="${data.chat_id}"]`);
+    if (previewEl) {
+        previewEl.textContent = data.text;
+        previewEl.style.fontStyle = "normal";
+        previewEl.style.color = "#666666";
+    }
+    
+        const timeEl = document.querySelector(`[data-chat-time-id="${data.chat_id}"]`);
+    if (timeEl) {
+        timeEl.textContent = "just now";
+    }
+
+
+    if (String(data.chat_id) !== String(activeChatId)) {
+        const badge = document.getElementById(`badge-${data.chat_id}`);
+        if (badge) {
+            let currentCount = parseInt(badge.textContent.trim()) || 0;
+            currentCount += 1;
+            badge.textContent = currentCount;
+            badge.style.display = "flex";
+        }
+    }
+});
+
 
 async function loadChat(chatId, chatName) {
     if (!chatId) return;
@@ -109,11 +155,20 @@ async function loadChat(chatId, chatName) {
             for (const msg of messages) {
                 const newMessage = document.createElement("div");
                 newMessage.className = "message-item";
+                
                 let senderName = msg.sender;
-                if (senderName === "test@test.com") {
-                    senderName = "Користувач";
-                }
-                newMessage.innerHTML = `<div class="msg-text"><strong>${senderName}:</strong> ${msg.text}</div>`;
+                if (senderName === "test@test.com") senderName = "Користувач";
+                
+                newMessage.innerHTML = `
+                    <div class="msg-avatar" style="background: #4DA6FF; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 500;">${msg.avatar_letter}</div>
+                    <div class="msg-content" style="display: flex; flex-direction: column; gap: 4px;">
+                        <div class="msg-meta" style="display: flex; align-items: center; gap: 8px;">
+                            <span class="msg-author" style="font-weight: 600; color: #1A1A1A; font-size: 15px;">${senderName}</span>
+                            <span class="msg-time" style="color: #999999; font-size: 12px;">${msg.time}</span>
+                        </div>
+                        <div class="msg-text" style="color: #333333; font-size: 15px; line-height: 22px;">${msg.text}</div>
+                    </div>
+                `;
                 messageContainer.appendChild(newMessage);
             }
             messageContainer.scrollTop = messageContainer.scrollHeight;
@@ -124,7 +179,11 @@ async function loadChat(chatId, chatName) {
             messageContainer.innerHTML = '<div style="padding: 20px; text-align: center; color: #999;">Помилка завантаження</div>';
         }
     }
-    
+    const badge = document.getElementById(`badge-${chatId}`);
+    if (badge) {
+        badge.textContent = "0";
+        badge.style.display = "none";
+    }
     await loadUsers(chatId);
 }
 
